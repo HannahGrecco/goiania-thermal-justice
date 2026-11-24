@@ -1,0 +1,86 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Cidade verde para quem?",
+    "section": "",
+    "text": "Goiânia é conhecida como cidade verde. Mas o frescor e o verde chegam a todos os bairros do mesmo jeito?\nPara responder, cruzamos imagens de satélite com o Censo 2022 em 2.226 setores urbanos. O resultado, em três pontos:"
+  },
+  {
+    "objectID": "index.html#os-dados",
+    "href": "index.html#os-dados",
+    "title": "Cidade verde para quem?",
+    "section": "2 Os dados",
+    "text": "2 Os dados\n\n\n\n\n\n\n\n\nO que\nDe onde\nComo entrou\n\n\n\n\nTemperatura da superfície\nSatélites Landsat 8 e 9 (banda térmica), ago–set 2026\nMédia por setor\n\n\nRenda\nCenso 2022, IBGE (renda do responsável pelo domicílio)\nMediana por setor\n\n\nCobertura do solo\nESA WorldCover 2021\n% de árvores, construído, grama e solo exposto\n\n\nAltitude\nSRTM\nMédia por setor\n\n\nParques\nOpenStreetMap, áreas acima de 10 ha (19 parques)\nDistância do centro do setor ao parque mais próximo\n\n\nUnidade de análise\nSetores censitários urbanos (IBGE)\n2.226 setores após aplicar a máscara urbana\n\n\n\n\n\nSetor censitário: a menor área para a qual o IBGE divulga dados de renda. Em Goiânia, cada setor tem em geral algumas centenas de domicílios.\n\n\n\n\n\n\nNotaComo o satélite mede a temperatura\n\n\n\n\n\nUsamos a temperatura de brilho da banda térmica do Landsat: a temperatura da superfície (telhado, asfalto, solo, copa de árvore), e não do ar que respiramos. Ela é útil para comparar áreas da mesma cidade, mas não equivale ao termômetro do dia a dia. Tentamos primeiro o produto de temperatura de superfície corrigido (nível 2), mas ele falhou em 513 setores, então usamos o produto de nível 1, que cobre todos. A janela é de agosto e setembro de 2026, no período seco do Cerrado."
+  },
+  {
+    "objectID": "index.html#só-os-mais-ricos-têm-um-bairro-mais-fresco",
+    "href": "index.html#só-os-mais-ricos-têm-um-bairro-mais-fresco",
+    "title": "Cidade verde para quem?",
+    "section": "4 Só os mais ricos têm um bairro mais fresco",
+    "text": "4 Só os mais ricos têm um bairro mais fresco\n\nEntre cinco grupos de renda, só o mais rico escapa do calor.\n\nOs grupos Q1 a Q4 têm temperatura muito parecida: a mediana de cada um fica em torno de 31 °C. Só o Q5 se separa, cerca de 1,15 °C abaixo da média dos outros quatro.\n\n\n\nTemperatura de superfície por quintil de renda. O ponto vermelho é a média; a caixa mostra onde estão os 50% do meio dos setores.\n\n\n\n\nComo ler o gráfico: cada caixa é um grupo de renda. A linha dentro é a mediana, a caixa cobre a metade central dos setores, e os pontos soltos são setores muito diferentes da média do grupo.\nIsso quer dizer que não existe uma escada em que cada aumento de renda traz um pouco de frescor. A vantagem está concentrada no topo.\n\n\n\n\n\n\nNotaDetalhe técnico: quintis\n\n\n\n\n\nOs quintis são relativos: dividem os setores em cinco grupos de tamanho parecido pela renda mediana. Como muitos setores têm a mesma renda, os grupos não ficam exatamente iguais. A correlação de Spearman entre renda e temperatura é de cerca de −0,31, uma associação moderada."
+  },
+  {
+    "objectID": "index.html#não-é-só-falta-de-árvore",
+    "href": "index.html#não-é-só-falta-de-árvore",
+    "title": "Cidade verde para quem?",
+    "section": "5 Não é só falta de árvore",
+    "text": "5 Não é só falta de árvore\n\nA explicação mais óbvia, “bairro pobre tem menos árvore”, não se sustenta na média.\n\nNossa hipótese inicial era que os bairros de renda baixa teriam menos vegetação e mais área construída, e por isso seriam mais quentes. Os dados não confirmaram isso na média: o grupo mais pobre tem até mais árvores e menos área construída do que os grupos intermediários.\nTestamos também se o solo exposto e a grama seca explicariam a diferença, e essa explicação também não se sustentou. A vantagem do grupo mais rico continua depois de levar em conta vegetação, área construída, solo, altitude e distância a parques.\nO que isso sugere, sem provar: a composição do solo medida em 10 metros não captura tudo. Telhados, materiais, verticalização e a forma da cidade também importam.\n\n\n\n\n\n\nNotaDetalhe técnico: regressão e limites\n\n\n\n\n\nEstimamos um modelo de regressão (OLS) com a temperatura como resposta e renda padronizada, cobertura do solo e altitude como controles. O coeficiente da renda padronizada fica entre −0,43 e −0,48 °C por desvio-padrão, dependendo dos controles. A colinearidade é baixa (VIF = 3,5). Os resíduos têm forte autocorrelação espacial (Moran’s I = 0,68), então os erros-padrão são otimistas e não usamos valores de p."
+  },
+  {
+    "objectID": "index.html#parques-perto-é-mais-fresco-mas-nem-todos-estão-perto",
+    "href": "index.html#parques-perto-é-mais-fresco-mas-nem-todos-estão-perto",
+    "title": "Cidade verde para quem?",
+    "section": "6 Parques: perto é mais fresco, mas nem todos estão perto",
+    "text": "6 Parques: perto é mais fresco, mas nem todos estão perto\n\n0,9 km de um parque para os mais ricos. 3,1 km para os mais pobres.\n\nUsamos os 19 parques acima de 10 hectares. Os setores mais próximos tendem a ser mais frescos, com uma diferença de cerca de 1 °C entre os setores a menos de 500 m e os que ficam entre 2 e 4 km. Essa relação não continua além de cerca de 4 km.\nComo os parques estão mais perto dos bairros ricos, o benefício de frescor também se distribui de forma desigual.\n\n\n\n\n\nDistância ao parque grande por faixa de renda.\n\n\n\n\n\n\nTemperatura por faixa de distância ao parque.\n\n\n\n\nNão afirmamos que o parque causa o frescor: setores perto de parques também podem ter outras características em comum. A associação é consistente e se mantém ao excluirmos os setores que contêm um parque, mas é uma associação."
+  },
+  {
+    "objectID": "index.html#onde-agir-primeiro",
+    "href": "index.html#onde-agir-primeiro",
+    "title": "Cidade verde para quem?",
+    "section": "7 Onde agir primeiro",
+    "text": "7 Onde agir primeiro\nPara transformar o diagnóstico em prioridade, marcamos 225 setores (10,1% do total) que atendem a três condições ao mesmo tempo:\n\nrenda baixa (grupos Q1 ou Q2),\ntemperatura acima do percentil 75 de toda a cidade,\nmais de 2 km de distância de um parque grande.\n\n\n\n\nSetores prioritários (vermelho) e parques grandes (contorno azul). Os prioritários se concentram em manchas no centro-norte, no leste e em algumas bordas a oeste.\n\n\nEsse critério é uma escolha explícita, feita para orientar onde olhar primeiro, e não um diagnóstico definitivo. Testamos variações dos limites (percentil, distância, grupos de renda) e o conjunto muda de tamanho, mas as manchas principais permanecem."
+  },
+  {
+    "objectID": "index.html#explore-o-mapa",
+    "href": "index.html#explore-o-mapa",
+    "title": "Cidade verde para quem?",
+    "section": "8 Explore o mapa",
+    "text": "8 Explore o mapa\nLigue e desligue as camadas e clique em um setor para ver os dados dele."
+  },
+  {
+    "objectID": "index.html#o-que-esta-análise-não-diz",
+    "href": "index.html#o-que-esta-análise-não-diz",
+    "title": "Cidade verde para quem?",
+    "section": "9 O que esta análise não diz",
+    "text": "9 O que esta análise não diz\n\n\n\n\n\n\n\nLimite\nPor que importa\n\n\n\n\nAssociação, não causa\nNão afirmamos que a renda causa o calor, nem que um parque, por si só, esfria um bairro.\n\n\nTemperatura de superfície\nNão é a temperatura do ar nem a sensação térmica.\n\n\nJanela de dois meses\nAgosto e setembro de 2026, no período seco. Outras estações podem mostrar outro padrão.\n\n\nAutocorrelação espacial\nSetores vizinhos são parecidos, então a precisão estatística é menor do que parece.\n\n\nCritério de prioridade\nÉ uma escolha, e outras escolhas"
+  },
+  {
+    "objectID": "index.html#fontes-e-reprodução",
+    "href": "index.html#fontes-e-reprodução",
+    "title": "Cidade verde para quem?",
+    "section": "8 Fontes e reprodução",
+    "text": "8 Fontes e reprodução\nIBGE (Censo 2022), USGS Landsat 8/9, ESA WorldCover 2021, SRTM, OpenStreetMap. Código e notebooks: (link do repositório)."
+  },
+  {
+    "objectID": "index.html#código-e-reprodução",
+    "href": "index.html#código-e-reprodução",
+    "title": "Cidade verde para quem?",
+    "section": "8 Código e reprodução",
+    "text": "8 Código e reprodução\nCódigo e notebooks: (link do repositório)."
+  },
+  {
+    "objectID": "index.html#por-que-olhar-para-o-calor",
+    "href": "index.html#por-que-olhar-para-o-calor",
+    "title": "Cidade verde para quem?",
+    "section": "1 Por que olhar para o calor?",
+    "text": "1 Por que olhar para o calor?\nCalor urbano não se distribui por acaso. Superfícies construídas e solo exposto esquentam mais do que áreas com árvores e água, e o efeito se acumula em quem vive e trabalha nessas áreas. Em uma cidade grande, isso é uma questão de justiça ambiental: quem sofre mais com o calor é, muitas vezes, quem tem menos recursos para se proteger dele.\n\nA pergunta do trabalho é simples: na Goiânia de hoje, o frescor está igualmente disponível? Não buscamos provar que a renda causa o calor. Buscamos medir se existe uma desigualdade de exposição, e onde ela é mais forte."
+  },
+  {
+    "objectID": "index.html#o-que-fizemos-passo-a-passo",
+    "href": "index.html#o-que-fizemos-passo-a-passo",
+    "title": "Cidade verde para quem?",
+    "section": "3 O que fizemos, passo a passo",
+    "text": "3 O que fizemos, passo a passo\n\nRecortamos a área urbana. Aplicamos uma máscara para tirar zonas rurais e vazios que distorcem a média de um setor.\nCalculamos a temperatura média de cada setor a partir das imagens de satélite.\nJuntamos renda, cobertura do solo, altitude e distância a parques na mesma tabela, uma linha por setor.\nDividimos os setores em cinco grupos de renda (quintis), do mais pobre (Q1) ao mais rico (Q5).\nComparamos a temperatura entre os grupos e testamos se a diferença se mantém depois de controlar por vegetação, área construída, altitude e parques.\nMarcamos os setores prioritários com um critério explícito e testamos a sensibilidade a ele."
+  }
+]

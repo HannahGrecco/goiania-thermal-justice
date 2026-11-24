@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap');
+
+:root { --bg:#0e0e0e; --ink:#d9d4ca; --muted:#8d8a84; --heat:#fdae61; --rule:#2a2a2a; }
+
+body { background:var(--bg); color:var(--ink);
+  font-family:'Newsreader',Georgia,serif; font-size:1.22rem; line-height:1.65; }
+h1,h2,h3,.title { font-family:'Newsreader',Georgia,serif; font-weight:600; color:#f0ece4; letter-spacing:-0.01em; }
+
+/* capa */
+.quarto-title-banner { background-size:cover; background-position:center; padding:5rem 0 4rem; }
+.quarto-title-banner .title { font-size:3.6rem; line-height:1.05; }
+.quarto-title-banner .subtitle { font-style:italic; font-weight:400; color:var(--heat); font-size:1.4rem; }
+.quarto-title-meta-heading { text-transform:uppercase; letter-spacing:.12em; font-size:.7rem; color:var(--muted); }
+
+/* seções: sem barrinha, só um número discreto */
+h2 { margin-top:4.5rem; font-size:1.9rem; border:0; }
+.header-section-number { color:var(--muted); font-weight:400; font-size:.9rem; margin-right:.6rem;
+  font-family:system-ui,sans-serif; letter-spacing:.08em; }
+
+/* número grande dentro da frase */
+.big { font-size:2.6rem; line-height:1; font-weight:600; color:var(--heat); white-space:nowrap; }
+.lede { font-size:1.45rem; line-height:1.5; }
+
+/* citação em destaque, sem caixa */
+.pull { font-style:italic; font-size:1.55rem; line-height:1.4; color:#f0ece4;
+  margin:2.2rem 0; padding:0; border:0; }
+
+/* figuras */
+figure { margin:2.5rem 0; }
+figure img { border-radius:2px; }
+figcaption { color:var(--muted); font-size:.85rem; font-family:system-ui,sans-serif; line-height:1.4; margin-top:.6rem; }
+
+a { color:var(--heat); text-decoration:underline; text-underline-offset:3px; }
+iframe { border:1px solid var(--rule) !important; border-radius:2px; }
+.callout { border-radius:2px; background:transparent; border:1px solid var(--rule); }
+#TOC, .sidebar nav[role=doc-toc] { font-family:system-ui,sans-serif; font-size:.8rem; }
