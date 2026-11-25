@@ -10,10 +10,24 @@ Projeto final do bootcamp Future Tech Leaders / AEB (geoespacial). ODS relaciona
 
 ## 1. Objetivo
 
-Responder à pergunta: **os setores censitários de menor renda de Goiânia têm menos vegetação, superfícies mais quentes e menos acesso a parques grandes?**
+**Problema.** Goiânia é uma das capitais mais arborizadas do país, mas essa média não mostra como a vegetação e o calor se distribuem entre grupos socioeconômicos. O projeto investiga se os setores de menor renda têm menos vegetação e temperaturas de superfície mais elevadas.
+
+**Objetivo.** Cruzar dados de satélite (NDVI e banda térmica do Landsat 8 e 9) com a renda do Censo 2022, por setor censitário, para investigar:
+
+- a distribuição desigual de vegetação e calor entre os grupos de renda;
+- a associação entre vegetação e temperatura;
+- o acesso a áreas verdes, medido pela distância até o parque grande mais próximo.
+
+O resultado busca dar a quem decide uma base para priorizar a arborização e a adaptação às ondas de calor, principalmente no período seco de agosto e setembro.
+
+**Produto.** Uma análise espacial publicada como mapa web interativo com narrativa guiada. O mapa tem camadas de temperatura, renda, distância a parques e uma vista dos setores em que renda baixa, calor alto e distância de áreas verdes coincidem. A tabela final por setor e o código são públicos.
+
+**Contribuição prática.** Identificar os setores onde essas condições coincidem permite a gestores priorizar a arborização e as ações de adaptação ao calor onde o risco é maior. O mapa aberto e reproduzível também dá a jornalistas e moradores uma base para discutir essas prioridades.
+
+**Como a análise foi feita**
 
 - **Unidade de análise:** setor censitário do Censo 2022 (IBGE), município 5208707.
-- **Método:** cartografia e análise espacial descritiva, sem aprendizado de máquina. Os setores são divididos em cinco grupos de renda (quintis, Q1 a Q5), e a temperatura, a vegetação e a distância a parques são comparadas entre os grupos.
+- **Método:** cartografia e análise espacial descritiva, sem aprendizado de máquina, porque a pergunta é descritiva e os dados são uma tabela com um valor por setor. Os setores são divididos em cinco grupos de renda (quintis, Q1 a Q5), e a temperatura, a vegetação e a distância a parques são comparadas entre os grupos.
 - **Natureza dos resultados:** associações, não causas.
 
 **Principais resultados** (2.226 setores urbanos):
@@ -38,7 +52,7 @@ goiania-thermal-justice/
 │   ├── figures/        Figuras estáticas (PNG)
 │   ├── tables/         Tabelas de resultados (CSV)
 │   └── web/            sectors.geojson: tabela final por setor, usada no site
-├── cache/              Parques e bairros baixados do OpenStreetMap (gerado)
+├── cache/              Extrações do OpenStreetMap usadas na análise (parques, bairros e contexto, 15/11/2026)
 ├── site/               Fonte do site (Quarto + Observable JS + MapLibre)
 │   ├── index.qmd       Texto e cálculos da página
 │   ├── styles.css      Estilo
@@ -120,29 +134,43 @@ uv run jupyter lab
 
 ## 5. Como reproduzir os resultados
 
-1. **Baixe os dados do IBGE (Censo 2022)** e salve em `data/raw/` com estes nomes:
-   - `GO_setores_CD2022.gpkg`: malha de setores censitários de Goiás (malha definitiva).
-   - `Agregados_por_setores_renda_responsavel_BR.csv`: agregados por setor, renda do responsável pelo domicílio (separador `;`).
-2. **Rode os notebooks em ordem:** `01` → `02` → `05`. O `03` e o `04` são exploratórios e não são necessários para os resultados finais.
-3. **Gere a temperatura de brilho por setor** em `data/processed/sector_stats_urban_v2.csv` (colunas `sector_id`, `lst_brightness_mean_c`, `lst_brightness_median_c`, `n_valid_bt_pixels`). Veja a seção 6: o código desta etapa ainda não está no repositório.
-4. **Rode o notebook `06_analysis_clean.ipynb`.** Ele chama o `scripts/step3_4_prep.py`, que gera `outputs/web/sectors.geojson`.
-5. **Rode os scripts complementares:**
+Há dois caminhos. O **A** refaz a análise final a partir das tabelas já processadas, que estão no repositório. Não precisa dos dados brutos do IBGE nem de conta no Earth Engine, e foi testado do zero num clone limpo. O **B** refaz tudo desde os dados brutos.
+
+### A. Análise final, a partir dos dados processados (recomendado)
+
+Precisa apenas da instalação da seção 3 (`uv sync`) e de internet: o notebook baixa as imagens de satélite de fundo de algumas figuras.
+
+1. **Rode o notebook 06 inteiro.** Abra `notebooks/06_analysis_clean.ipynb` no VS Code (kernel `.venv`) e execute todas as células, ou rode no terminal:
    ```bash
-   uv run python scripts/step_elev.py
+   uv run jupyter nbconvert --to notebook --execute notebooks/06_analysis_clean.ipynb --output 06_executado.ipynb --ExecutePreprocessor.timeout=1800
+   ```
+   O notebook chama o `scripts/step3_4_prep.py` e gera de novo `outputs/figures/`, `outputs/tables/` e `outputs/web/sectors.geojson`. Ao final, ele mostra VIF ≈ 3,5, I de Moran ≈ 0,68 e 19 parques grandes. O script usa as extrações do OpenStreetMap salvas em `cache/`. Se essa pasta for apagada, ele baixa os dados de novo, mas o servidor público do OpenStreetMap pode recusar o pedido quando está ocupado, e dados novos podem ser diferentes dos usados aqui.
+2. **Gere a tabela de sensibilidade do critério de prioridade:**
+   ```bash
    uv run python scripts/step5_priority.py
    ```
-   Depois rode de novo as duas últimas células do notebook 06, que leem a tabela de sensibilidade.
-6. **Atualize os dados do site e gere de novo:**
+   Ele deve mostrar `N prioritários: 225` e `% dos elegíveis: 10.11%`. O script também acrescenta uma coluna `priority` ao `outputs/web/sectors.geojson`; os demais valores não mudam, e o site calcula a prioridade por conta própria.
+3. **Atualize os dados do site e gere o site de novo:**
    ```bash
    cp outputs/web/sectors.geojson site/data/sectors.geojson
    uv run python -c "import geopandas as g; p=g.read_file('cache/goiania_large_parks.gpkg').to_crs(4326)[['name','geometry']].rename(columns={'name':'nome'}); p.to_file('site/data/parks.geojson', driver='GeoJSON')"
    cp outputs/figures/p6_*.png outputs/figures/p5_renda_distancia_lado_a_lado.png outputs/figures/p5_temp_por_faixa_parque.png site/figures/
    uv run quarto render site
    ```
+4. **Confira:** abra o site (seção 4). Com o critério padrão, a seção "Onde agir primeiro" deve mostrar **225 setores**. Se o número for outro, a própria página mostra um aviso.
 
-**Conferência:** com o critério padrão, a seção "Onde agir primeiro" do site deve mostrar **225 setores**. Se o número for outro, a própria página mostra um aviso.
+### B. Do zero, a partir dos dados brutos
 
-A ordem dos passos 4 e 5 foi reconstruída a partir das dependências entre os arquivos. Confira antes de uma reprodução completa.
+Precisa, além da instalação, de conta no Google Earth Engine (seção 3).
+
+1. **Baixe os dados do IBGE (Censo 2022)** e salve em `data/raw/` com estes nomes:
+   - `GO_setores_CD2022.gpkg`: malha de setores censitários de Goiás (malha definitiva).
+   - `Agregados_por_setores_renda_responsavel_BR.csv`: agregados por setor, renda do responsável pelo domicílio (separador `;`).
+2. **Rode os notebooks `01` → `02` → `05`.** Eles geram `sectors_income`, `sector_lst_ndvi.csv` e `sector_stats_urban.csv` em `data/processed/`. O `03` e o `04` são exploratórios e não são necessários para os resultados finais.
+3. **Altitude por setor** (opcional, Earth Engine): `uv run python scripts/step_elev.py`, que gera `data/processed/sector_elevation.csv`.
+4. **Siga o caminho A.**
+
+A temperatura de brilho por setor (`data/processed/sector_stats_urban_v2.csv`), usada pelo notebook 06, está no repositório, mas o código que a gerou não está. Por isso o caminho B usa esse arquivo como está.
 
 ## 6. Outras informações
 
@@ -163,10 +191,6 @@ A ordem dos passos 4 e 5 foi reconstruída a partir das dependências entre os a
 - A renda considerada é só a do responsável pelo domicílio.
 - Um valor por setor esconde diferenças internas, e setores muito pequenos têm valores menos confiáveis.
 
-### Pendências conhecidas de reprodução
-
-- O código que gera `data/processed/sector_stats_urban_v2.csv` (temperatura de brilho, nível 1) não está no repositório. Os notebooks 02 e 05 calculam apenas a temperatura de superfície do nível 2 (`ST_B10`).
-- O teste de robustez "sem os setores que contêm um parque" e o modelo de regressão com altitude foram feitos fora dos notebooks atuais.
 
 ### Fontes de dados e créditos
 

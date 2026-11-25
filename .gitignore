@@ -7,3 +7,9 @@ data/raw/*
 
 # Contexto para assistentes de IA (uso local, fora do repositório)
 AGENTS.md
+
+# Cache HTTP do OSMnx (as extrações em .gpkg ficam versionadas)
+cache/*.json
+
+# Cópia executada do notebook gerada pelo comando de reprodução
+notebooks/*_executado.ipynb
