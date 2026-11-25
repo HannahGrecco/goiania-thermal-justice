@@ -2,24 +2,40 @@ project:
   type: website
   output-dir: ../docs
   resources:
-    - mapa.html
     - data/*
+    - assets/*
+    - assets/img/*
 
 lang: pt
 website:
   title: "Cidade verde para quem?"
 
+execute:
+  echo: false
+
 format:
   html:
+    # sem fórmulas com $...$: senão dois ${...} do OJS no mesmo parágrafo viram matemática
+    from: markdown-tex_math_dollars
     theme: darkly
     css: styles.css
     toc: true
     toc-title: "Nesta história"
+    toc-depth: 2
     number-sections: true
     lightbox: true
+    smooth-scroll: true
     grid:
       body-width: 720px
       margin-width: 260px
       sidebar-width: 0px
-    title-block-banner: figures/p6_mapa_temperatura.png
-    title-block-banner-color: "#f0ece4"
+    include-in-header:
+      - text: |
+          <link rel="preconnect" href="https://fonts.googleapis.com">
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+          <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+          <link href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
+          <script src="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+    include-after-body:
+      - text: |
+          <script src="assets/efeitos.js"></script>

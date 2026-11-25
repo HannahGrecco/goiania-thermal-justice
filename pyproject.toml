@@ -3,12 +3,18 @@ name = "goiania-thermal-justice"
 version = "0.1.0"
 requires-python = ">=3.13"
 dependencies = [
+    "contextily>=1.7.1",
     "earthengine-api>=1.7.50",
+    "esda>=2.10.0",
     "geemap>=0.38.9",
     "geopandas>=1.2.0",
     "jupyterlab>=4.6.4",
+    "libpysal>=4.15.1",
     "matplotlib>=3.11.2",
     "osmnx>=2.1.1",
+    "scipy>=1.18.1",
+    "seaborn>=0.13.2",
+    "statsmodels>=0.15.0",
 ]
 
 [dependency-groups]

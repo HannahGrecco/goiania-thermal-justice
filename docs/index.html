@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Hannah Grecco Moraes Baptista Moreira">
+<meta name="description" content="Calor, vegetação e acesso a parques entre os setores censitários de Goiânia, por faixa de renda.">
 
 <title>Cidade verde para quem?</title>
 <style>
@@ -26,6 +27,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -77,24 +113,14 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Procurar"
   }
 }</script>
-<style>
-
-      .quarto-title-block .quarto-title-banner h1,
-      .quarto-title-block .quarto-title-banner h2,
-      .quarto-title-block .quarto-title-banner h3,
-      .quarto-title-block .quarto-title-banner h4,
-      .quarto-title-block .quarto-title-banner h5,
-      .quarto-title-block .quarto-title-banner h6
-      {
-        color: #f0ece4;
-      }
-
-      .quarto-title-block .quarto-title-banner {
-        color: #f0ece4;
-background-image: url(figures/p6_mapa_temperatura.png);
-background-size: cover;
-      }
-</style>
+<style>html{ scroll-behavior: smooth; }</style>
+<script type="module" src="site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;family=Source+Sans+3:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 
 
 <link rel="stylesheet" href="styles.css">
@@ -104,79 +130,850 @@ background-size: cover;
 
 <div id="quarto-search-results"></div>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
-      <h1 class="title">Cidade verde para quem?</h1>
-            <p class="subtitle lead">Calor, vegetação e renda nos setores censitários de Goiânia</p>
-                      </div>
-  </div>
-    
-  
-  <div class="quarto-title-meta">
-
-      <div>
-      <div class="quarto-title-meta-heading">Autor</div>
-      <div class="quarto-title-meta-contents">
-               <p>Hannah Grecco Moraes Baptista Moreira </p>
-            </div>
-    </div>
-      
-    
-      
-    </div>
-    
-  
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
     <h2 id="toc-title">Nesta história</h2>
    
-  <ul>
+  <ul class="collapse">
   <li><a href="#por-que-olhar-para-o-calor" id="toc-por-que-olhar-para-o-calor" class="nav-link active" data-scroll-target="#por-que-olhar-para-o-calor"><span class="header-section-number">1</span> Por que olhar para o calor?</a></li>
-  <li><a href="#os-dados" id="toc-os-dados" class="nav-link" data-scroll-target="#os-dados"><span class="header-section-number">2</span> Os dados</a></li>
-  <li><a href="#o-que-fizemos-passo-a-passo" id="toc-o-que-fizemos-passo-a-passo" class="nav-link" data-scroll-target="#o-que-fizemos-passo-a-passo"><span class="header-section-number">3</span> O que fizemos, passo a passo</a></li>
-  <li><a href="#só-os-mais-ricos-têm-um-bairro-mais-fresco" id="toc-só-os-mais-ricos-têm-um-bairro-mais-fresco" class="nav-link" data-scroll-target="#só-os-mais-ricos-têm-um-bairro-mais-fresco"><span class="header-section-number">4</span> Só os mais ricos têm um bairro mais fresco</a></li>
-  <li><a href="#não-é-só-falta-de-árvore" id="toc-não-é-só-falta-de-árvore" class="nav-link" data-scroll-target="#não-é-só-falta-de-árvore"><span class="header-section-number">5</span> Não é só falta de árvore</a></li>
-  <li><a href="#parques-perto-é-mais-fresco-mas-nem-todos-estão-perto" id="toc-parques-perto-é-mais-fresco-mas-nem-todos-estão-perto" class="nav-link" data-scroll-target="#parques-perto-é-mais-fresco-mas-nem-todos-estão-perto"><span class="header-section-number">6</span> Parques: perto é mais fresco, mas nem todos estão perto</a></li>
-  <li><a href="#onde-agir-primeiro" id="toc-onde-agir-primeiro" class="nav-link" data-scroll-target="#onde-agir-primeiro"><span class="header-section-number">7</span> Onde agir primeiro</a></li>
-  <li><a href="#explore-o-mapa" id="toc-explore-o-mapa" class="nav-link" data-scroll-target="#explore-o-mapa"><span class="header-section-number">8</span> Explore o mapa</a></li>
-  <li><a href="#o-que-esta-análise-não-diz" id="toc-o-que-esta-análise-não-diz" class="nav-link" data-scroll-target="#o-que-esta-análise-não-diz"><span class="header-section-number">9</span> O que esta análise não diz</a></li>
+  <li><a href="#só-os-setores-de-maior-renda-são-mais-frescos" id="toc-só-os-setores-de-maior-renda-são-mais-frescos" class="nav-link" data-scroll-target="#só-os-setores-de-maior-renda-são-mais-frescos"><span class="header-section-number">2</span> Só os setores de maior renda são mais frescos</a></li>
+  <li><a href="#não-é-só-falta-de-árvore" id="toc-não-é-só-falta-de-árvore" class="nav-link" data-scroll-target="#não-é-só-falta-de-árvore"><span class="header-section-number">3</span> Não é só falta de árvore</a></li>
+  <li><a href="#parques-perto-é-mais-fresco-mas-nem-todos-estão-perto" id="toc-parques-perto-é-mais-fresco-mas-nem-todos-estão-perto" class="nav-link" data-scroll-target="#parques-perto-é-mais-fresco-mas-nem-todos-estão-perto"><span class="header-section-number">4</span> Parques: perto é mais fresco, mas nem todos estão perto</a></li>
+  <li><a href="#onde-agir-primeiro" id="toc-onde-agir-primeiro" class="nav-link" data-scroll-target="#onde-agir-primeiro"><span class="header-section-number">5</span> Onde agir primeiro</a></li>
+  <li><a href="#explore-o-mapa" id="toc-explore-o-mapa" class="nav-link" data-scroll-target="#explore-o-mapa"><span class="header-section-number">6</span> Explore o mapa</a></li>
+  <li><a href="#os-dados" id="toc-os-dados" class="nav-link" data-scroll-target="#os-dados"><span class="header-section-number">7</span> Os dados</a></li>
+  <li><a href="#passo-a-passo-da-análise" id="toc-passo-a-passo-da-análise" class="nav-link" data-scroll-target="#passo-a-passo-da-análise"><span class="header-section-number">8</span> Passo a passo da análise</a></li>
+  <li><a href="#limites" id="toc-limites" class="nav-link" data-scroll-target="#limites"><span class="header-section-number">9</span> Limites</a></li>
+  <li><a href="#glossário" id="toc-glossário" class="nav-link" data-scroll-target="#glossário"><span class="header-section-number">10</span> Glossário</a></li>
+  <li><a href="#referências" id="toc-referências" class="nav-link" data-scroll-target="#referências"><span class="header-section-number">11</span> Referências</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content" tabindex="-1">
+<main class="content page-columns page-full" id="quarto-document-content" tabindex="-1">
 
-
-
-
-
-<div class="lede">
-<p>Goiânia é conhecida como cidade verde. Mas o frescor e o verde chegam a todos os bairros do mesmo jeito?</p>
-<p>Para responder, cruzamos imagens de satélite com o Censo 2022 em <strong>2.226 setores urbanos</strong>. O resultado, em três pontos:</p>
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Cidade verde para quem?</h1>
+<p class="subtitle lead">Calor, vegetação e renda nos setores censitários de Goiânia</p>
 </div>
-<ol type="1">
-<li><strong>Só o grupo mais rico vive em um bairro mais fresco</strong>, cerca de <strong>1,15 °C</strong> abaixo dos outros quatro grupos de renda, que são muito parecidos entre si.</li>
-<li><strong>O acesso a parques grandes é desigual:</strong> em média, 0,9 km para os mais ricos e 3,1 km para os mais pobres.</li>
-<li><strong>225 setores</strong> reúnem renda baixa, calor alto e distância de qualquer parque grande: são os candidatos a receber ação primeiro.</li>
-</ol>
+
+<div>
+  <div class="description">
+    Calor, vegetação e acesso a parques entre os setores censitários de Goiânia, por faixa de renda.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autor</div>
+    <div class="quarto-title-meta-contents">
+             <p>Hannah Grecco Moraes Baptista Moreira </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<!-- capa em tela cheia: imagem = recorte de p6_mapa_temperatura.png (assets/img/) -->
+<section class="capa column-screen" aria-label="Capa">
+  <div class="capa-fundo" data-parallax="0.35">
+    <picture>
+      <source media="(max-aspect-ratio: 4/5)" srcset="assets/img/capa_temperatura_retrato.jpg">
+      <img class="capa-img" src="assets/img/capa_temperatura.jpg" alt="" fetchpriority="high">
+    </picture>
+  </div>
+  <div class="capa-veu" aria-hidden="true"></div>
+  <div class="capa-texto">
+    <h1 class="capa-titulo">Cidade verde para quem?</h1>
+    <p class="capa-subtitulo">Calor, vegetação e renda nos setores censitários de Goiânia</p>
+    <p class="capa-autoria">Hannah Grecco Moraes Baptista Moreira</p>
+  </div>
+  <a class="capa-rolar" href="#inicio">Role para continuar<span aria-hidden="true"></span></a>
+</section>
+<div class="cell hidden">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb1" data-startfrom="30" data-source-offset="-64"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 29;"><span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>d3 <span class="op">=</span> <span class="im">import</span>(<span class="st">"https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm"</span>)</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>Plot <span class="op">=</span> <span class="im">import</span>(<span class="st">"https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6.16/+esm"</span>)</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>mapaLib <span class="op">=</span> <span class="im">import</span>(<span class="kw">new</span> <span class="fu">URL</span>(<span class="st">"assets/mapa.js"</span><span class="op">,</span> <span class="bu">document</span><span class="op">.</span><span class="at">baseURI</span>)<span class="op">.</span><span class="at">href</span>)</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>setoresGeo <span class="op">=</span> <span class="fu">FileAttachment</span>(<span class="st">"data/sectors.geojson"</span>)<span class="op">.</span><span class="fu">json</span>()</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>parquesGeo <span class="op">=</span> <span class="fu">FileAttachment</span>(<span class="st">"data/parks.geojson"</span>)<span class="op">.</span><span class="fu">json</span>()</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>setores <span class="op">=</span> setoresGeo<span class="op">.</span><span class="at">features</span><span class="op">.</span><span class="fu">map</span>((f) <span class="kw">=&gt;</span> f<span class="op">.</span><span class="at">properties</span>)</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="co">// ---------- formatação em pt-BR ----------</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="co">// sinal de menos tipográfico (−) no lugar do hífen</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>fmt <span class="op">=</span> (x<span class="op">,</span> c <span class="op">=</span> <span class="dv">2</span>) <span class="kw">=&gt;</span> x<span class="op">.</span><span class="fu">toLocaleString</span>(<span class="st">"pt-BR"</span><span class="op">,</span> { <span class="dt">minimumFractionDigits</span><span class="op">:</span> c<span class="op">,</span> <span class="dt">maximumFractionDigits</span><span class="op">:</span> c })<span class="op">.</span><span class="fu">replace</span>(<span class="st">"-"</span><span class="op">,</span> <span class="st">"−"</span>)</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>fmtInt <span class="op">=</span> (x) <span class="kw">=&gt;</span> x<span class="op">.</span><span class="fu">toLocaleString</span>(<span class="st">"pt-BR"</span>)</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>fmtRenda <span class="op">=</span> (x) <span class="kw">=&gt;</span> <span class="st">"R$ "</span> <span class="op">+</span> x<span class="op">.</span><span class="fu">toLocaleString</span>(<span class="st">"pt-BR"</span><span class="op">,</span> { <span class="dt">maximumFractionDigits</span><span class="op">:</span> <span class="dv">1</span> })</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>DESTAQUE <span class="op">=</span> <span class="st">"#fdae61"</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>TINTA <span class="op">=</span> <span class="st">"#d9d4ca"</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>APAGADO <span class="op">=</span> <span class="st">"#8d8a84"</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="co">// ---------- estatísticas por quintil (d3.quantile = mesmo método do pandas) ----------</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>estatQuintis <span class="op">=</span> d3<span class="op">.</span><span class="fu">range</span>(<span class="dv">1</span><span class="op">,</span> <span class="dv">6</span>)<span class="op">.</span><span class="fu">map</span>((q) <span class="kw">=&gt;</span> {</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> g <span class="op">=</span> setores<span class="op">.</span><span class="fu">filter</span>((d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">quintil</span> <span class="op">===</span> q)<span class="op">;</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> t <span class="op">=</span> g<span class="op">.</span><span class="fu">map</span>((d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">temperatura</span>)<span class="op">;</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> {</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>    <span class="dt">quintil</span><span class="op">:</span> q<span class="op">,</span> <span class="dt">rotulo</span><span class="op">:</span> <span class="vs">`Q</span><span class="sc">${</span>q<span class="sc">}</span><span class="vs">`</span><span class="op">,</span> <span class="dt">n</span><span class="op">:</span> g<span class="op">.</span><span class="at">length</span><span class="op">,</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>    <span class="dt">media</span><span class="op">:</span> d3<span class="op">.</span><span class="fu">mean</span>(t)<span class="op">,</span> <span class="dt">mediana</span><span class="op">:</span> d3<span class="op">.</span><span class="fu">median</span>(t)<span class="op">,</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>    <span class="dt">q1</span><span class="op">:</span> d3<span class="op">.</span><span class="fu">quantile</span>(t<span class="op">,</span> <span class="fl">0.25</span>)<span class="op">,</span> <span class="dt">q3</span><span class="op">:</span> d3<span class="op">.</span><span class="fu">quantile</span>(t<span class="op">,</span> <span class="fl">0.75</span>)<span class="op">,</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>    <span class="dt">distMedia</span><span class="op">:</span> d3<span class="op">.</span><span class="fu">mean</span>(g<span class="op">,</span> (d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">dist_park_m</span>) <span class="op">/</span> <span class="dv">1000</span><span class="op">,</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>    <span class="dt">distMediana</span><span class="op">:</span> d3<span class="op">.</span><span class="fu">median</span>(g<span class="op">,</span> (d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">dist_park_m</span>) <span class="op">/</span> <span class="dv">1000</span><span class="op">,</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>    <span class="dt">rendaMin</span><span class="op">:</span> d3<span class="op">.</span><span class="fu">min</span>(g<span class="op">,</span> (d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">income_median</span>)<span class="op">,</span> <span class="dt">rendaMax</span><span class="op">:</span> d3<span class="op">.</span><span class="fu">max</span>(g<span class="op">,</span> (d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">income_median</span>)<span class="op">,</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>    <span class="dt">arvore</span><span class="op">:</span> d3<span class="op">.</span><span class="fu">mean</span>(g<span class="op">,</span> (d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">pct_tree</span>)<span class="op">,</span> <span class="dt">construido</span><span class="op">:</span> d3<span class="op">.</span><span class="fu">mean</span>(g<span class="op">,</span> (d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">pct_built</span>)<span class="op">,</span> <span class="dt">ndvi</span><span class="op">:</span> d3<span class="op">.</span><span class="fu">mean</span>(g<span class="op">,</span> (d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">ndvi_mean</span>)</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>  }<span class="op">;</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>Q1 <span class="op">=</span> estatQuintis[<span class="dv">0</span>]</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>Q5 <span class="op">=</span> estatQuintis[<span class="dv">4</span>]</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>mediaQ1aQ4 <span class="op">=</span> d3<span class="op">.</span><span class="fu">mean</span>(estatQuintis<span class="op">.</span><span class="fu">slice</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">4</span>)<span class="op">,</span> (d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">media</span>)          <span class="co">// média das 4 médias de grupo</span></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>mediaQ1aQ4Setores <span class="op">=</span> d3<span class="op">.</span><span class="fu">mean</span>(setores<span class="op">.</span><span class="fu">filter</span>((d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">quintil</span> <span class="op">&lt;</span> <span class="dv">5</span>)<span class="op">,</span> (d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">temperatura</span>)</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>difQ5 <span class="op">=</span> Q5<span class="op">.</span><span class="at">media</span> <span class="op">-</span> mediaQ1aQ4</span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>faixasRenda <span class="op">=</span> estatQuintis<span class="op">.</span><span class="fu">map</span>((d) <span class="kw">=&gt;</span> ({ <span class="dt">quintil</span><span class="op">:</span> d<span class="op">.</span><span class="at">quintil</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> d<span class="op">.</span><span class="at">rendaMin</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> d<span class="op">.</span><span class="at">rendaMax</span> }))</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>paradasTemp <span class="op">=</span> [<span class="fl">0.05</span><span class="op">,</span> <span class="fl">0.25</span><span class="op">,</span> <span class="fl">0.5</span><span class="op">,</span> <span class="fl">0.75</span><span class="op">,</span> <span class="fl">0.95</span>]<span class="op">.</span><span class="fu">map</span>((p) <span class="kw">=&gt;</span> d3<span class="op">.</span><span class="fu">quantile</span>(setores<span class="op">,</span> p<span class="op">,</span> (d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">temperatura</span>))</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a><span class="co">// ---------- correlação de Spearman (renda × temperatura), com postos médios nos empates ----------</span></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>postos <span class="op">=</span> (v) <span class="kw">=&gt;</span> {</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> ordem <span class="op">=</span> d3<span class="op">.</span><span class="fu">range</span>(v<span class="op">.</span><span class="at">length</span>)<span class="op">.</span><span class="fu">sort</span>((a<span class="op">,</span> b) <span class="kw">=&gt;</span> v[a] <span class="op">-</span> v[b])<span class="op">;</span></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> r <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(v<span class="op">.</span><span class="at">length</span>)<span class="op">;</span></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (<span class="kw">let</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> ordem<span class="op">.</span><span class="at">length</span><span class="op">;</span> ) {</span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> j <span class="op">=</span> i<span class="op">;</span></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> (j <span class="op">+</span> <span class="dv">1</span> <span class="op">&lt;</span> ordem<span class="op">.</span><span class="at">length</span> <span class="op">&amp;&amp;</span> v[ordem[j <span class="op">+</span> <span class="dv">1</span>]] <span class="op">===</span> v[ordem[i]]) j<span class="op">++;</span></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (<span class="kw">let</span> k <span class="op">=</span> i<span class="op">;</span> k <span class="op">&lt;=</span> j<span class="op">;</span> k<span class="op">++</span>) r[ordem[k]] <span class="op">=</span> (i <span class="op">+</span> j) <span class="op">/</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>    i <span class="op">=</span> j <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> r<span class="op">;</span></span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>spearman <span class="op">=</span> {</span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> a <span class="op">=</span> <span class="fu">postos</span>(setores<span class="op">.</span><span class="fu">map</span>((d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">income_median</span>))<span class="op">;</span></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> b <span class="op">=</span> <span class="fu">postos</span>(setores<span class="op">.</span><span class="fu">map</span>((d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">temperatura</span>))<span class="op">;</span></span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> ma <span class="op">=</span> d3<span class="op">.</span><span class="fu">mean</span>(a)<span class="op">,</span> mb <span class="op">=</span> d3<span class="op">.</span><span class="fu">mean</span>(b)<span class="op">;</span></span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> d3<span class="op">.</span><span class="fu">sum</span>(a<span class="op">,</span> (x<span class="op">,</span> i) <span class="kw">=&gt;</span> (x <span class="op">-</span> ma) <span class="op">*</span> (b[i] <span class="op">-</span> mb)) <span class="op">/</span></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Math</span><span class="op">.</span><span class="fu">sqrt</span>(d3<span class="op">.</span><span class="fu">sum</span>(a<span class="op">,</span> (x) <span class="kw">=&gt;</span> (x <span class="op">-</span> ma) <span class="op">**</span> <span class="dv">2</span>) <span class="op">*</span> d3<span class="op">.</span><span class="fu">sum</span>(b<span class="op">,</span> (x) <span class="kw">=&gt;</span> (x <span class="op">-</span> mb) <span class="op">**</span> <span class="dv">2</span>))<span class="op">;</span></span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a><span class="co">// ---------- critério de prioridade do estudo ----------</span></span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a>limiarP75 <span class="op">=</span> d3<span class="op">.</span><span class="fu">quantile</span>(setores<span class="op">,</span> <span class="fl">0.75</span><span class="op">,</span> (d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">temperatura</span>)</span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a>ehPrioritario <span class="op">=</span> (d<span class="op">,</span> quintis<span class="op">,</span> limiar<span class="op">,</span> distancia) <span class="kw">=&gt;</span></span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>  quintis<span class="op">.</span><span class="fu">includes</span>(d<span class="op">.</span><span class="at">quintil</span>) <span class="op">&amp;&amp;</span> d<span class="op">.</span><span class="at">temperatura</span> <span class="op">&gt;</span> limiar <span class="op">&amp;&amp;</span> d<span class="op">.</span><span class="at">dist_park_m</span> <span class="op">&gt;</span> distancia</span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a>idsPrioritarios <span class="op">=</span> <span class="kw">new</span> <span class="bu">Set</span>(setores<span class="op">.</span><span class="fu">filter</span>((d) <span class="kw">=&gt;</span> <span class="fu">ehPrioritario</span>(d<span class="op">,</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span>]<span class="op">,</span> limiarP75<span class="op">,</span> <span class="dv">2000</span>))<span class="op">.</span><span class="fu">map</span>((d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">sector_id</span>))</span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>nPrio <span class="op">=</span> idsPrioritarios<span class="op">.</span><span class="at">size</span></span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a>pctPrio <span class="op">=</span> (<span class="dv">100</span> <span class="op">*</span> nPrio) <span class="op">/</span> setores<span class="op">.</span><span class="at">length</span></span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a>ESPERADO_PRIO <span class="op">=</span> <span class="dv">225</span>   <span class="co">// contagem do notebook 06 (tabela de sensibilidade), usada só para conferência</span></span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a><span class="co">// ---------- faixas de distância ao parque ----------</span></span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>faixas <span class="op">=</span> [</span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a>  { <span class="dt">rotulo</span><span class="op">:</span> <span class="st">"&lt; 0,5 km"</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">500</span> }<span class="op">,</span></span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a>  { <span class="dt">rotulo</span><span class="op">:</span> <span class="st">"0,5–1 km"</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">500</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">1000</span> }<span class="op">,</span></span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a>  { <span class="dt">rotulo</span><span class="op">:</span> <span class="st">"1–2 km"</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">1000</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">2000</span> }<span class="op">,</span></span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>  { <span class="dt">rotulo</span><span class="op">:</span> <span class="st">"2–4 km"</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">2000</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">4000</span> }<span class="op">,</span></span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a>  { <span class="dt">rotulo</span><span class="op">:</span> <span class="st">"&gt; 4 km"</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">4000</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="kw">Infinity</span> }</span>
+<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a>estatFaixas <span class="op">=</span> faixas<span class="op">.</span><span class="fu">map</span>((f) <span class="kw">=&gt;</span> {</span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> g <span class="op">=</span> setores<span class="op">.</span><span class="fu">filter</span>((d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">dist_park_m</span> <span class="op">&gt;=</span> f<span class="op">.</span><span class="at">min</span> <span class="op">&amp;&amp;</span> d<span class="op">.</span><span class="at">dist_park_m</span> <span class="op">&lt;</span> f<span class="op">.</span><span class="at">max</span>)<span class="op">;</span></span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> { <span class="op">...</span>f<span class="op">,</span> <span class="dt">n</span><span class="op">:</span> g<span class="op">.</span><span class="at">length</span><span class="op">,</span> <span class="dt">media</span><span class="op">:</span> d3<span class="op">.</span><span class="fu">mean</span>(g<span class="op">,</span> (d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">temperatura</span>)<span class="op">,</span> <span class="dt">mediana</span><span class="op">:</span> d3<span class="op">.</span><span class="fu">median</span>(g<span class="op">,</span> (d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">temperatura</span>) }<span class="op">;</span></span>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a>difPerto2a4 <span class="op">=</span> estatFaixas[<span class="dv">3</span>]<span class="op">.</span><span class="at">media</span> <span class="op">-</span> estatFaixas[<span class="dv">0</span>]<span class="op">.</span><span class="at">media</span></span>
+<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a><span class="co">// ---------- largura das áreas largas (.column-page), reativa ao redimensionar ----------</span></span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a>larguraLarga <span class="op">=</span> Generators<span class="op">.</span><span class="fu">observe</span>((notificar) <span class="kw">=&gt;</span> {</span>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> alvo <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">"medida-pagina"</span>)<span class="op">;</span></span>
+<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> obs <span class="op">=</span> <span class="kw">new</span> <span class="fu">ResizeObserver</span>(() <span class="kw">=&gt;</span> <span class="fu">notificar</span>(<span class="bu">Math</span><span class="op">.</span><span class="fu">max</span>(<span class="dv">320</span><span class="op">,</span> alvo<span class="op">.</span><span class="at">clientWidth</span>)))<span class="op">;</span></span>
+<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a>  obs<span class="op">.</span><span class="fu">observe</span>(alvo)<span class="op">;</span></span>
+<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a>  <span class="fu">notificar</span>(<span class="bu">Math</span><span class="op">.</span><span class="fu">max</span>(<span class="dv">320</span><span class="op">,</span> alvo<span class="op">.</span><span class="at">clientWidth</span>))<span class="op">;</span></span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> () <span class="kw">=&gt;</span> obs<span class="op">.</span><span class="fu">disconnect</span>()<span class="op">;</span></span>
+<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-1-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-1-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-1-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-1-4" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-1-5" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-1-6" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-1-7" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-1-8" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-1-9" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-1-10" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-1-11" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-1-12" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-1-13" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-1-14" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-1-15" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-1-16" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-1-17" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-1-18" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-1-19" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-1-20" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-1-21" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-1-22" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-1-23" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-1-24" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-1-25" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-1-26" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-1-27" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-1-28" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-1-29" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-1-30" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-1-31" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-1-32" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
+<div id="medida-pagina" class="column-page" aria-hidden="true">
+
+</div>
+<!-- abertura: manchetes reais (título e data conferidos nas páginas em 25/11/2026) -->
+<div id="inicio" class="manchetes-rotulo column-page">
+<p>Como Goiânia aparece no noticiário</p>
+</div>
+<div class="manchetes column-page">
+<div class="manchete">
+<p><img class="manchete-foto" src="assets/img/noticia_1.jpg" alt="Canal com água em um parque arborizado, com caminhos de calçada dos dois lados." loading="lazy" decoding="async"></p>
+<p><span class="credito">Foto: Jackson Rodrigues / Prefeitura de Goiânia</span></p>
+<p><a href="https://ohoje.com/2019/05/16/goiania-e-a-cidade-mais-arborizada-do-brasil/">Goiânia é a cidade mais arborizada do Brasil</a></p>
+<p><span class="fonte">O Hoje · 16 mai. 2019</span></p>
+</div>
+<div class="manchete">
+<p><img class="manchete-foto" src="assets/img/noticia_2.jpg" alt="Vista aérea de um grande parque arborizado cercado por prédios altos." loading="lazy" decoding="async"></p>
+<p><span class="credito">Foto: Jackson Rodrigues / Prefeitura de Goiânia</span></p>
+<p><a href="https://ohoje.com/2023/10/09/goiania-celebra-90-anos-como-capital-mais-verde/">Goiânia celebra 90 anos como capital mais verde</a></p>
+<p><span class="fonte">O Hoje · 9 out. 2023</span></p>
+</div>
+<div class="manchete">
+<p><img class="manchete-foto" src="assets/img/noticia_3.jpg" alt="Monumento em forma de X sobre uma avenida, com árvores e prédios ao fundo." loading="lazy" decoding="async"></p>
+<p><span class="credito">Foto: reprodução / Curta Mais</span></p>
+<p><a href="https://www.metropoles.com/brasil/goiania-cidade-arborizada-do-mundo-onu">Goiânia recebe título de Cidade Arborizada do Mundo da ONU</a></p>
+<p><span class="fonte">Metrópoles · 11 mar. 2024</span></p>
+</div>
+</div>
+<div class="virada">
+<p>Mas a média de uma cidade inteira não conta toda a história. A cidade é feita de <span class="realce">pessoas</span>, e a sombra, o frescor e o verde perto de casa podem mudar bastante de um setor para outro.</p>
+</div>
+<div class="lede">
+<p>Esta história pergunta <strong>para quem</strong> é a cidade verde. A análise cruza imagens de satélite com o Censo 2022 em <span><span id="ojs-element-id-1"></span></span> setores urbanos para ver como o calor e o acesso ao verde se dividem entre quem mora nos setores de maior renda e quem mora nos de menor renda.</p>
+</div>
+<div class="achados">
+<div class="achado">
+<p><span class="achado-num"><span><span id="ojs-element-id-2"></span></span> °C</span></p>
+<p><span class="achado-txt">É o quanto a superfície é mais fresca onde moram as pessoas de <strong>maior renda</strong>, em comparação com os outros quatro grupos. Entre esses quatro, quem mora enfrenta praticamente o mesmo calor.</span></p>
+</div>
+<div class="achado">
+<p><span class="achado-num"><span><span id="ojs-element-id-3"></span></span> km</span></p>
+<p><span class="achado-txt">É a distância mediana até um parque grande para quem mora nos setores de <strong>menor renda</strong>. Para quem mora nos de maior renda, <span><span id="ojs-element-id-4"></span></span> km.</span></p>
+</div>
+<div class="achado">
+<p><span class="achado-num"><span><span id="ojs-element-id-5"></span></span></span></p>
+<p><span class="achado-txt">setores onde moradores de <strong>renda baixa</strong> convivem com calor alto e ficam a mais de 2 km de qualquer parque grande. São os lugares candidatos a receber ação primeiro.</span></p>
+</div>
+</div>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p class="page-columns page-full"><a href="figures/p6_mapa_temperatura.png" class="lightbox page-columns page-full" data-gallery="quarto-lightbox-gallery-1" title="Temperatura de superfície média por setor censitário de Goiânia (Landsat 8/9, ago–set 2026). Quanto mais escuro o vermelho, mais quente."><img src="figures/p6_mapa_temperatura.png" class="column-page img-fluid figure-img" alt="Temperatura de superfície média por setor censitário de Goiânia (Landsat 8/9, ago–set 2026). Quanto mais escuro o vermelho, mais quente."></a></p>
-<figcaption>Temperatura de superfície média por setor censitário de Goiânia (Landsat 8/9, ago–set 2026). Quanto mais escuro o vermelho, mais quente.</figcaption>
+<p class="page-columns page-full"><a href="figures/p6_mapa_temperatura.png" class="lightbox page-columns page-full" data-gallery="quarto-lightbox-gallery-1" title="Temperatura de superfície média por setor censitário de Goiânia (Landsat 8/9, ago–set 2026). Quanto mais escuro o vermelho, mais quente. Clique para ampliar; a versão interativa está mais abaixo."><img src="figures/p6_mapa_temperatura.png" class="column-page img-fluid figure-img" alt="Temperatura de superfície média por setor censitário de Goiânia (Landsat 8/9, ago–set 2026). Quanto mais escuro o vermelho, mais quente. Clique para ampliar; a versão interativa está mais abaixo."></a></p>
+<figcaption>Temperatura de superfície média por setor censitário de Goiânia (Landsat 8/9, ago–set 2026). Quanto mais escuro o vermelho, mais quente. Clique para ampliar; a versão interativa está mais abaixo.</figcaption>
 </figure>
 </div>
 <section id="por-que-olhar-para-o-calor" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="por-que-olhar-para-o-calor"><span class="header-section-number">1</span> Por que olhar para o calor?</h2>
-<p>Calor urbano não se distribui por acaso. Superfícies construídas e solo exposto esquentam mais do que áreas com árvores e água, e o efeito se acumula em quem vive e trabalha nessas áreas. Em uma cidade grande, isso é uma questão de <strong>justiça ambiental</strong>: quem sofre mais com o calor é, muitas vezes, quem tem menos recursos para se proteger dele.</p>
+<div class="contraste">
+<p>Uma rua arborizada e uma rua só de asfalto recebem o mesmo sol.</p>
+<p><span class="contraste-volta">Não esquentam do mesmo jeito.</span></p>
+</div>
+<p>Asfalto, telhados e solo exposto acumulam o calor do dia. Árvores, vegetação e água ajudam a dissipá-lo. Por isso o calor de uma cidade não se espalha por igual: ele se concentra em alguns lugares, e em quem mora, trabalha e anda a pé por eles.</p>
+<p>É aqui que entra a ideia de <strong>justiça ambiental</strong>. Os benefícios do ambiente, como a sombra e o verde, e os seus custos, como o calor, também podem ser divididos de forma desigual. Muitas vezes, quem fica com a parte mais quente da cidade é quem tem menos meios para se proteger dela.</p>
 <!-- Se confirmar os trechos: acrescentar aqui a referência a Sousa e Ferreira (2012) sobre bairros periféricos e a ilha de calor em Goiânia. Só cite o que o texto realmente afirma. -->
-<p>A pergunta do trabalho é simples: <strong>na Goiânia de hoje, o frescor está igualmente disponível?</strong> Não buscamos provar que a renda <em>causa</em> o calor. Buscamos medir se existe uma desigualdade de exposição, e onde ela é mais forte.</p>
+<div class="pull">
+<p>Em Goiânia, a sombra e o frescor estão divididos por igual entre os setores da cidade?</p>
+</div>
+<p>Para responder, a análise se divide em três perguntas menores:</p>
+<div class="perguntas">
+<p><span class="pergunta-rotulo">Calor</span> Quem mora nos setores de menor renda enfrenta superfícies mais quentes?</p>
+<p><span class="pergunta-rotulo">Verde</span> Esses setores têm menos árvores e vegetação?</p>
+<p><span class="pergunta-rotulo">Acesso</span> Ficam mais longe de um parque grande?</p>
+</div>
+<p>O objetivo não é provar que a renda <em>causa</em> o calor, e sim medir se essa diferença existe e onde ela é mais forte.</p>
 </section>
-<section id="os-dados" class="level2 page-columns page-full" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="os-dados"><span class="header-section-number">2</span> Os dados</h2>
+<section id="só-os-setores-de-maior-renda-são-mais-frescos" class="level2 page-columns page-full" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="só-os-setores-de-maior-renda-são-mais-frescos"><span class="header-section-number">2</span> Só os setores de maior renda são mais frescos</h2>
+<div class="pull">
+<p>Entre cinco grupos de renda, só o de renda mais alta vive em setores mais frescos.</p>
+</div>
+<p>Os grupos Q1 a Q4 têm temperatura muito parecida: as medianas ficam entre <span><span id="ojs-element-id-7"></span></span> e <span><span id="ojs-element-id-8"></span></span> °C. Só o Q5 se separa, <span class="big"><span><span id="ojs-element-id-6"></span></span> °C</span> abaixo da média dos outros quatro.</p>
+<div class="cell page-columns page-full">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb2" data-startfrom="230" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 229;"><span id="cb2-230"><a href="#cb2-230" aria-hidden="true" tabindex="-1"></a>viewof quintilClicado <span class="op">=</span> {</span>
+<span id="cb2-231"><a href="#cb2-231" aria-hidden="true" tabindex="-1"></a>  <span class="co">// dispersão vertical fixa (semente) para os pontos não se sobreporem</span></span>
+<span id="cb2-232"><a href="#cb2-232" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> aleatorio <span class="op">=</span> d3<span class="op">.</span><span class="fu">randomLcg</span>(<span class="dv">7</span>)<span class="op">;</span></span>
+<span id="cb2-233"><a href="#cb2-233" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> desvio <span class="op">=</span> <span class="kw">new</span> <span class="bu">Map</span>(setores<span class="op">.</span><span class="fu">map</span>((d) <span class="kw">=&gt;</span> [d<span class="op">.</span><span class="at">sector_id</span><span class="op">,</span> (<span class="fu">aleatorio</span>() <span class="op">-</span> <span class="fl">0.5</span>) <span class="op">*</span> <span class="fl">0.56</span>]))<span class="op">;</span></span>
+<span id="cb2-234"><a href="#cb2-234" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> cor <span class="op">=</span> (q) <span class="kw">=&gt;</span> (q <span class="op">===</span> <span class="dv">5</span> <span class="op">?</span> DESTAQUE <span class="op">:</span> APAGADO)<span class="op">;</span></span>
+<span id="cb2-235"><a href="#cb2-235" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> grafico <span class="op">=</span> Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb2-236"><a href="#cb2-236" aria-hidden="true" tabindex="-1"></a>    <span class="dt">width</span><span class="op">:</span> larguraLarga<span class="op">,</span></span>
+<span id="cb2-237"><a href="#cb2-237" aria-hidden="true" tabindex="-1"></a>    <span class="dt">height</span><span class="op">:</span> <span class="dv">380</span><span class="op">,</span></span>
+<span id="cb2-238"><a href="#cb2-238" aria-hidden="true" tabindex="-1"></a>    <span class="dt">marginLeft</span><span class="op">:</span> <span class="dv">48</span><span class="op">,</span></span>
+<span id="cb2-239"><a href="#cb2-239" aria-hidden="true" tabindex="-1"></a>    <span class="dt">marginBottom</span><span class="op">:</span> <span class="dv">44</span><span class="op">,</span></span>
+<span id="cb2-240"><a href="#cb2-240" aria-hidden="true" tabindex="-1"></a>    <span class="dt">style</span><span class="op">:</span> { <span class="dt">background</span><span class="op">:</span> <span class="st">"transparent"</span><span class="op">,</span> <span class="dt">color</span><span class="op">:</span> TINTA<span class="op">,</span> <span class="dt">fontFamily</span><span class="op">:</span> <span class="st">"'Source Sans 3', system-ui, sans-serif"</span><span class="op">,</span> <span class="dt">fontSize</span><span class="op">:</span> <span class="st">"12.5px"</span> }<span class="op">,</span></span>
+<span id="cb2-241"><a href="#cb2-241" aria-hidden="true" tabindex="-1"></a>    <span class="co">// só graus inteiros no eixo (antes, ticks de meio grau arredondados apareciam repetidos: 27, 27, 28…)</span></span>
+<span id="cb2-242"><a href="#cb2-242" aria-hidden="true" tabindex="-1"></a>    <span class="dt">x</span><span class="op">:</span> { <span class="dt">label</span><span class="op">:</span> <span class="st">"Temperatura de brilho da superfície (°C) →"</span><span class="op">,</span> <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb2-243"><a href="#cb2-243" aria-hidden="true" tabindex="-1"></a>         <span class="dt">ticks</span><span class="op">:</span> d3<span class="op">.</span><span class="fu">range</span>(<span class="bu">Math</span><span class="op">.</span><span class="fu">ceil</span>(d3<span class="op">.</span><span class="fu">min</span>(setores<span class="op">,</span> (d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">temperatura</span>))<span class="op">,</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">floor</span>(d3<span class="op">.</span><span class="fu">max</span>(setores<span class="op">,</span> (d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">temperatura</span>)) <span class="op">+</span> <span class="dv">1</span>)<span class="op">,</span></span>
+<span id="cb2-244"><a href="#cb2-244" aria-hidden="true" tabindex="-1"></a>         <span class="dt">tickFormat</span><span class="op">:</span> (d) <span class="kw">=&gt;</span> <span class="fu">fmt</span>(d<span class="op">,</span> <span class="dv">0</span>) }<span class="op">,</span></span>
+<span id="cb2-245"><a href="#cb2-245" aria-hidden="true" tabindex="-1"></a>    <span class="dt">y</span><span class="op">:</span> { <span class="dt">domain</span><span class="op">:</span> [<span class="fl">5.6</span><span class="op">,</span> <span class="fl">0.4</span>]<span class="op">,</span> <span class="dt">ticks</span><span class="op">:</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span>]<span class="op">,</span> <span class="dt">tickFormat</span><span class="op">:</span> (d) <span class="kw">=&gt;</span> <span class="vs">`Q</span><span class="sc">${</span>d<span class="sc">}</span><span class="vs">`</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="kw">null</span><span class="op">,</span> <span class="dt">tickSize</span><span class="op">:</span> <span class="dv">0</span> }<span class="op">,</span></span>
+<span id="cb2-246"><a href="#cb2-246" aria-hidden="true" tabindex="-1"></a>    <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb2-247"><a href="#cb2-247" aria-hidden="true" tabindex="-1"></a>      Plot<span class="op">.</span><span class="fu">dot</span>(setores<span class="op">,</span> { <span class="dt">x</span><span class="op">:</span> <span class="st">"temperatura"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> (d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">quintil</span> <span class="op">+</span> desvio<span class="op">.</span><span class="fu">get</span>(d<span class="op">.</span><span class="at">sector_id</span>)<span class="op">,</span> <span class="dt">r</span><span class="op">:</span> <span class="fl">1.6</span><span class="op">,</span></span>
+<span id="cb2-248"><a href="#cb2-248" aria-hidden="true" tabindex="-1"></a>        <span class="dt">fill</span><span class="op">:</span> (d) <span class="kw">=&gt;</span> <span class="fu">cor</span>(d<span class="op">.</span><span class="at">quintil</span>)<span class="op">,</span> <span class="dt">fillOpacity</span><span class="op">:</span> <span class="fl">0.32</span> })<span class="op">,</span></span>
+<span id="cb2-249"><a href="#cb2-249" aria-hidden="true" tabindex="-1"></a>      Plot<span class="op">.</span><span class="fu">ruleX</span>([mediaQ1aQ4]<span class="op">,</span> { <span class="dt">y1</span><span class="op">:</span> <span class="fl">0.5</span><span class="op">,</span> <span class="dt">y2</span><span class="op">:</span> <span class="fl">4.5</span><span class="op">,</span> <span class="dt">stroke</span><span class="op">:</span> APAGADO<span class="op">,</span> <span class="dt">strokeDasharray</span><span class="op">:</span> <span class="st">"3,3"</span> })<span class="op">,</span></span>
+<span id="cb2-250"><a href="#cb2-250" aria-hidden="true" tabindex="-1"></a>      Plot<span class="op">.</span><span class="fu">text</span>([mediaQ1aQ4]<span class="op">,</span> { <span class="dt">x</span><span class="op">:</span> (d) <span class="kw">=&gt;</span> d<span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="fl">0.45</span><span class="op">,</span> <span class="dt">text</span><span class="op">:</span> () <span class="kw">=&gt;</span> <span class="st">"média Q1–Q4"</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> APAGADO<span class="op">,</span> <span class="dt">dy</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">textAnchor</span><span class="op">:</span> <span class="st">"start"</span><span class="op">,</span> <span class="dt">dx</span><span class="op">:</span> <span class="dv">4</span> })<span class="op">,</span></span>
+<span id="cb2-251"><a href="#cb2-251" aria-hidden="true" tabindex="-1"></a>      Plot<span class="op">.</span><span class="fu">rect</span>(estatQuintis<span class="op">,</span> { <span class="dt">x1</span><span class="op">:</span> <span class="st">"q1"</span><span class="op">,</span> <span class="dt">x2</span><span class="op">:</span> <span class="st">"q3"</span><span class="op">,</span> <span class="dt">y1</span><span class="op">:</span> (d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">quintil</span> <span class="op">-</span> <span class="fl">0.32</span><span class="op">,</span> <span class="dt">y2</span><span class="op">:</span> (d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">quintil</span> <span class="op">+</span> <span class="fl">0.32</span><span class="op">,</span></span>
+<span id="cb2-252"><a href="#cb2-252" aria-hidden="true" tabindex="-1"></a>        <span class="dt">fill</span><span class="op">:</span> <span class="st">"none"</span><span class="op">,</span> <span class="dt">stroke</span><span class="op">:</span> (d) <span class="kw">=&gt;</span> (d<span class="op">.</span><span class="at">quintil</span> <span class="op">===</span> <span class="dv">5</span> <span class="op">?</span> DESTAQUE <span class="op">:</span> TINTA)<span class="op">,</span> <span class="dt">strokeWidth</span><span class="op">:</span> <span class="fl">1.3</span> })<span class="op">,</span></span>
+<span id="cb2-253"><a href="#cb2-253" aria-hidden="true" tabindex="-1"></a>      Plot<span class="op">.</span><span class="fu">ruleX</span>(estatQuintis<span class="op">,</span> { <span class="dt">x</span><span class="op">:</span> <span class="st">"mediana"</span><span class="op">,</span> <span class="dt">y1</span><span class="op">:</span> (d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">quintil</span> <span class="op">-</span> <span class="fl">0.32</span><span class="op">,</span> <span class="dt">y2</span><span class="op">:</span> (d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">quintil</span> <span class="op">+</span> <span class="fl">0.32</span><span class="op">,</span></span>
+<span id="cb2-254"><a href="#cb2-254" aria-hidden="true" tabindex="-1"></a>        <span class="dt">stroke</span><span class="op">:</span> (d) <span class="kw">=&gt;</span> (d<span class="op">.</span><span class="at">quintil</span> <span class="op">===</span> <span class="dv">5</span> <span class="op">?</span> DESTAQUE <span class="op">:</span> TINTA)<span class="op">,</span> <span class="dt">strokeWidth</span><span class="op">:</span> <span class="fl">2.5</span> })<span class="op">,</span></span>
+<span id="cb2-255"><a href="#cb2-255" aria-hidden="true" tabindex="-1"></a>      Plot<span class="op">.</span><span class="fu">dot</span>(estatQuintis<span class="op">,</span> { <span class="dt">x</span><span class="op">:</span> <span class="st">"media"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"quintil"</span><span class="op">,</span> <span class="dt">r</span><span class="op">:</span> <span class="dv">4</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">"#0e0e0e"</span><span class="op">,</span></span>
+<span id="cb2-256"><a href="#cb2-256" aria-hidden="true" tabindex="-1"></a>        <span class="dt">stroke</span><span class="op">:</span> (d) <span class="kw">=&gt;</span> (d<span class="op">.</span><span class="at">quintil</span> <span class="op">===</span> <span class="dv">5</span> <span class="op">?</span> DESTAQUE <span class="op">:</span> TINTA)<span class="op">,</span> <span class="dt">strokeWidth</span><span class="op">:</span> <span class="fl">1.5</span> })<span class="op">,</span></span>
+<span id="cb2-257"><a href="#cb2-257" aria-hidden="true" tabindex="-1"></a>      Plot<span class="op">.</span><span class="fu">tip</span>(estatQuintis<span class="op">,</span> Plot<span class="op">.</span><span class="fu">pointerY</span>({</span>
+<span id="cb2-258"><a href="#cb2-258" aria-hidden="true" tabindex="-1"></a>        <span class="dt">x</span><span class="op">:</span> <span class="st">"q3"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"quintil"</span><span class="op">,</span> <span class="dt">anchor</span><span class="op">:</span> <span class="st">"left"</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">"#151515"</span><span class="op">,</span> <span class="dt">stroke</span><span class="op">:</span> <span class="st">"#444"</span><span class="op">,</span></span>
+<span id="cb2-259"><a href="#cb2-259" aria-hidden="true" tabindex="-1"></a>        <span class="dt">title</span><span class="op">:</span> (d) <span class="kw">=&gt;</span> [</span>
+<span id="cb2-260"><a href="#cb2-260" aria-hidden="true" tabindex="-1"></a>          <span class="vs">`Q</span><span class="sc">${</span>d<span class="op">.</span><span class="at">quintil</span><span class="sc">}</span><span class="vs"> · </span><span class="sc">${</span><span class="fu">fmtInt</span>(d<span class="op">.</span><span class="at">n</span>)<span class="sc">}</span><span class="vs"> setores`</span><span class="op">,</span></span>
+<span id="cb2-261"><a href="#cb2-261" aria-hidden="true" tabindex="-1"></a>          <span class="vs">`renda mediana </span><span class="sc">${</span><span class="fu">fmtRenda</span>(d<span class="op">.</span><span class="at">rendaMin</span>)<span class="sc">}</span><span class="vs"> a </span><span class="sc">${</span><span class="fu">fmtRenda</span>(d<span class="op">.</span><span class="at">rendaMax</span>)<span class="sc">}</span><span class="vs">`</span><span class="op">,</span></span>
+<span id="cb2-262"><a href="#cb2-262" aria-hidden="true" tabindex="-1"></a>          <span class="vs">`média </span><span class="sc">${</span><span class="fu">fmt</span>(d<span class="op">.</span><span class="at">media</span>)<span class="sc">}</span><span class="vs"> °C · mediana </span><span class="sc">${</span><span class="fu">fmt</span>(d<span class="op">.</span><span class="at">mediana</span>)<span class="sc">}</span><span class="vs"> °C`</span><span class="op">,</span></span>
+<span id="cb2-263"><a href="#cb2-263" aria-hidden="true" tabindex="-1"></a>          <span class="vs">`quartis </span><span class="sc">${</span><span class="fu">fmt</span>(d<span class="op">.</span><span class="at">q1</span>)<span class="sc">}</span><span class="vs"> a </span><span class="sc">${</span><span class="fu">fmt</span>(d<span class="op">.</span><span class="at">q3</span>)<span class="sc">}</span><span class="vs"> °C`</span><span class="op">,</span></span>
+<span id="cb2-264"><a href="#cb2-264" aria-hidden="true" tabindex="-1"></a>          <span class="st">"clique para destacar no mapa"</span></span>
+<span id="cb2-265"><a href="#cb2-265" aria-hidden="true" tabindex="-1"></a>        ]<span class="op">.</span><span class="fu">join</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb2-266"><a href="#cb2-266" aria-hidden="true" tabindex="-1"></a>      }))</span>
+<span id="cb2-267"><a href="#cb2-267" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb2-268"><a href="#cb2-268" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb2-269"><a href="#cb2-269" aria-hidden="true" tabindex="-1"></a>  <span class="co">// clique: escolhe (ou desfaz) o quintil sob o ponteiro e avisa o mapa</span></span>
+<span id="cb2-270"><a href="#cb2-270" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> caixa <span class="op">=</span> <span class="fu">html</span><span class="vs">`&lt;div class="grafico-quintis"&gt;</span><span class="sc">${</span>grafico<span class="sc">}</span><span class="vs">&lt;/div&gt;`</span><span class="op">;</span></span>
+<span id="cb2-271"><a href="#cb2-271" aria-hidden="true" tabindex="-1"></a>  caixa<span class="op">.</span><span class="at">value</span> <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb2-272"><a href="#cb2-272" aria-hidden="true" tabindex="-1"></a>  grafico<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">"input"</span><span class="op">,</span> (e) <span class="kw">=&gt;</span> e<span class="op">.</span><span class="fu">stopPropagation</span>())<span class="op">;</span></span>
+<span id="cb2-273"><a href="#cb2-273" aria-hidden="true" tabindex="-1"></a>  grafico<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">"click"</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb2-274"><a href="#cb2-274" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> d <span class="op">=</span> grafico<span class="op">.</span><span class="at">value</span><span class="op">;</span></span>
+<span id="cb2-275"><a href="#cb2-275" aria-hidden="true" tabindex="-1"></a>    caixa<span class="op">.</span><span class="at">value</span> <span class="op">=</span> d <span class="op">&amp;&amp;</span> caixa<span class="op">.</span><span class="at">value</span> <span class="op">!==</span> d<span class="op">.</span><span class="at">quintil</span> <span class="op">?</span> d<span class="op">.</span><span class="at">quintil</span> <span class="op">:</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb2-276"><a href="#cb2-276" aria-hidden="true" tabindex="-1"></a>    caixa<span class="op">.</span><span class="fu">dispatchEvent</span>(<span class="kw">new</span> <span class="bu">Event</span>(<span class="st">"input"</span><span class="op">,</span> { <span class="dt">bubbles</span><span class="op">:</span> <span class="kw">true</span> }))<span class="op">;</span></span>
+<span id="cb2-277"><a href="#cb2-277" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb2-278"><a href="#cb2-278" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> caixa<span class="op">;</span></span>
+<span id="cb2-279"><a href="#cb2-279" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display column-page">
+<div id="ojs-cell-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell page-columns page-full">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb3" data-startfrom="284" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 283;"><span id="cb3-284"><a href="#cb3-284" aria-hidden="true" tabindex="-1"></a><span class="fu">html</span><span class="vs">`&lt;p class="legenda-grafico"&gt;Cada ponto é um setor. A caixa cobre os 50% do meio, o traço grosso é a mediana e o círculo é a média; a linha tracejada é a média dos grupos Q1 a Q4. Passe o mouse sobre um grupo para ver os números; clique para marcar os setores dele no &lt;a href="#explore-o-mapa"&gt;mapa&lt;/a&gt;</span><span class="sc">${</span>quintilClicado <span class="op">?</span> <span class="fu">html</span><span class="vs">` (agora: &lt;strong&gt;Q</span><span class="sc">${</span>quintilClicado<span class="sc">}</span><span class="vs">&lt;/strong&gt; destacado)`</span> <span class="op">:</span> <span class="st">""</span><span class="sc">}</span><span class="vs">.&lt;/p&gt;`</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display column-page">
+<div id="ojs-cell-3" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><strong>Como ler o gráfico:</strong> cada faixa horizontal é um grupo de renda. Q1 reúne os setores de renda mais baixa e Q5 os de renda mais alta. Os grupos são posições relativas (cerca de um quinto dos setores cada), não linhas de pobreza.</p>
+<p>Correlação de Spearman entre renda e temperatura: <span><span id="ojs-element-id-9"></span>,</span> uma associação moderada.</p>
+</div></div><p>Isso quer dizer que <strong>não existe uma escada</strong> em que cada aumento de renda traz um pouco de frescor. A vantagem está concentrada no topo.</p>
+</section>
+<section id="não-é-só-falta-de-árvore" class="level2 page-columns page-full" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="não-é-só-falta-de-árvore"><span class="header-section-number">3</span> Não é só falta de árvore</h2>
+<div class="pull">
+<p>A explicação mais óbvia, “onde a renda é menor, há menos árvores”, não se sustenta na média.</p>
+</div>
+<p>A hipótese inicial era que os setores de renda baixa teriam menos vegetação e mais área construída, e por isso seriam mais quentes. Os dados <strong>não confirmaram isso na média</strong>: o grupo de renda mais baixa tem até mais árvores e menos área construída do que os grupos intermediários.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb4" data-startfrom="304" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 303;"><span id="cb4-304"><a href="#cb4-304" aria-hidden="true" tabindex="-1"></a><span class="fu">html</span><span class="vs">`&lt;table class="tabela-numeros"&gt;</span></span>
+<span id="cb4-305"><a href="#cb4-305" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Grupo&lt;/th&gt;&lt;th&gt;Árvores (%)&lt;/th&gt;&lt;th&gt;Construído (%)&lt;/th&gt;&lt;th&gt;NDVI médio&lt;/th&gt;&lt;th&gt;Temperatura média&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;</span></span>
+<span id="cb4-306"><a href="#cb4-306" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;tbody&gt;</span><span class="sc">${</span>estatQuintis<span class="op">.</span><span class="fu">map</span>((d) <span class="kw">=&gt;</span> <span class="fu">html</span><span class="vs">`&lt;tr class=</span><span class="sc">${</span>d<span class="op">.</span><span class="at">quintil</span> <span class="op">===</span> <span class="dv">5</span> <span class="op">?</span> <span class="st">"linha-destaque"</span> <span class="op">:</span> <span class="st">""</span><span class="sc">}</span><span class="vs">&gt;</span></span>
+<span id="cb4-307"><a href="#cb4-307" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;td&gt;Q</span><span class="sc">${</span>d<span class="op">.</span><span class="at">quintil</span><span class="sc">}</span><span class="vs">&lt;/td&gt;&lt;td&gt;</span><span class="sc">${</span><span class="fu">fmt</span>(d<span class="op">.</span><span class="at">arvore</span><span class="op">,</span> <span class="dv">1</span>)<span class="sc">}</span><span class="vs">&lt;/td&gt;&lt;td&gt;</span><span class="sc">${</span><span class="fu">fmt</span>(d<span class="op">.</span><span class="at">construido</span><span class="op">,</span> <span class="dv">1</span>)<span class="sc">}</span><span class="vs">&lt;/td&gt;&lt;td&gt;</span><span class="sc">${</span><span class="fu">fmt</span>(d<span class="op">.</span><span class="at">ndvi</span>)<span class="sc">}</span><span class="vs">&lt;/td&gt;&lt;td&gt;</span><span class="sc">${</span><span class="fu">fmt</span>(d<span class="op">.</span><span class="at">media</span>)<span class="sc">}</span><span class="vs"> °C&lt;/td&gt;&lt;/tr&gt;`</span>)<span class="sc">}</span></span>
+<span id="cb4-308"><a href="#cb4-308" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/tbody&gt;&lt;/table&gt;</span></span>
+<span id="cb4-309"><a href="#cb4-309" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;p class="legenda-grafico"&gt;Médias por grupo de renda, calculadas a partir da tabela de setores.&lt;/p&gt;`</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-4" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<p>O contraste mais curioso está no topo: o Q5 tem a <strong>menor</strong> cobertura de árvores <span>(<span id="ojs-element-id-10"></span>%)</span> e a <strong>maior</strong> área construída <span>(<span id="ojs-element-id-11"></span>%)</span> entre os cinco grupos, e mesmo assim é o grupo mais fresco.</p>
+<p>Também foi testado se o solo exposto e a grama seca explicariam a diferença, e essa explicação também não se sustentou. A vantagem do grupo de renda mais alta <strong>continua</strong> depois de levar em conta vegetação, área construída, solo, altitude e distância a parques.</p>
+<p><strong>O que isso sugere, sem provar:</strong> olhar a cobertura do solo a cada 10 metros não conta a história toda. O tipo de telhado, os materiais das construções, a altura dos prédios e o desenho das ruas também podem pesar na temperatura, e nada disso foi medido aqui.</p>
+<!-- faixa: recorte de p5_distancia_parque.png -->
+<div class="faixa column-screen">
+  <div class="faixa-fundo" data-parallax="0.12">
+    <img src="assets/img/faixa_parques.jpg" loading="lazy" decoding="async" alt="Mapa de Goiânia com cada setor colorido pela distância ao parque grande mais próximo; os parques aparecem em contorno branco.">
+  </div>
+  <p class="faixa-legenda">Distância de cada setor ao parque grande mais próximo: do roxo (até 500 m) ao amarelo (mais de 4 km). Contorno branco: parques.</p>
+</div>
+</section>
+<section id="parques-perto-é-mais-fresco-mas-nem-todos-estão-perto" class="level2 page-columns page-full" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="parques-perto-é-mais-fresco-mas-nem-todos-estão-perto"><span class="header-section-number">4</span> Parques: perto é mais fresco, mas nem todos estão perto</h2>
+<div class="pull">
+<p><span><span id="ojs-element-id-12"></span></span> km de um parque para quem mora nos setores de maior renda. <span><span id="ojs-element-id-13"></span></span> km para quem mora nos de menor renda.</p>
+</div>
+<p>A análise considera os <span><span id="ojs-element-id-14"></span></span> parques acima de 10 hectares. Os setores mais próximos tendem a ser mais frescos, com uma diferença de cerca de <strong><span><span id="ojs-element-id-15"></span></span> °C</strong> entre os setores a menos de 500 m e os que ficam entre 2 e 4 km. Essa relação não continua além de cerca de 4 km.</p>
+<div class="cell page-columns page-full">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb5" data-startfrom="339" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 338;"><span id="cb5-339"><a href="#cb5-339" aria-hidden="true" tabindex="-1"></a>viewof faixasSel <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">checkbox</span>(faixas<span class="op">.</span><span class="fu">map</span>((f) <span class="kw">=&gt;</span> f<span class="op">.</span><span class="at">rotulo</span>)<span class="op">,</span> {</span>
+<span id="cb5-340"><a href="#cb5-340" aria-hidden="true" tabindex="-1"></a>  <span class="dt">label</span><span class="op">:</span> <span class="st">"Faixas de distância"</span><span class="op">,</span></span>
+<span id="cb5-341"><a href="#cb5-341" aria-hidden="true" tabindex="-1"></a>  <span class="dt">value</span><span class="op">:</span> faixas<span class="op">.</span><span class="fu">map</span>((f) <span class="kw">=&gt;</span> f<span class="op">.</span><span class="at">rotulo</span>)</span>
+<span id="cb5-342"><a href="#cb5-342" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display column-page">
+<div id="ojs-cell-5" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell page-columns page-full">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb6" data-startfrom="347" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 346;"><span id="cb6-347"><a href="#cb6-347" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb6-348"><a href="#cb6-348" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> ativa <span class="op">=</span> <span class="kw">new</span> <span class="bu">Set</span>(faixasSel)<span class="op">;</span></span>
+<span id="cb6-349"><a href="#cb6-349" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> faixaDe <span class="op">=</span> (m) <span class="kw">=&gt;</span> faixas<span class="op">.</span><span class="fu">find</span>((f) <span class="kw">=&gt;</span> m <span class="op">&gt;=</span> f<span class="op">.</span><span class="at">min</span> <span class="op">&amp;&amp;</span> m <span class="op">&lt;</span> f<span class="op">.</span><span class="at">max</span>)<span class="op">.</span><span class="at">rotulo</span><span class="op">;</span></span>
+<span id="cb6-350"><a href="#cb6-350" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> maxKm <span class="op">=</span> d3<span class="op">.</span><span class="fu">max</span>(setores<span class="op">,</span> (d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">dist_park_m</span>) <span class="op">/</span> <span class="dv">1000</span><span class="op">;</span></span>
+<span id="cb6-351"><a href="#cb6-351" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> selecionados <span class="op">=</span> estatFaixas<span class="op">.</span><span class="fu">filter</span>((f) <span class="kw">=&gt;</span> ativa<span class="op">.</span><span class="fu">has</span>(f<span class="op">.</span><span class="at">rotulo</span>))<span class="op">;</span></span>
+<span id="cb6-352"><a href="#cb6-352" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> grafico <span class="op">=</span> Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb6-353"><a href="#cb6-353" aria-hidden="true" tabindex="-1"></a>    <span class="dt">width</span><span class="op">:</span> larguraLarga<span class="op">,</span></span>
+<span id="cb6-354"><a href="#cb6-354" aria-hidden="true" tabindex="-1"></a>    <span class="dt">height</span><span class="op">:</span> <span class="dv">420</span><span class="op">,</span></span>
+<span id="cb6-355"><a href="#cb6-355" aria-hidden="true" tabindex="-1"></a>    <span class="dt">marginLeft</span><span class="op">:</span> <span class="dv">48</span><span class="op">,</span></span>
+<span id="cb6-356"><a href="#cb6-356" aria-hidden="true" tabindex="-1"></a>    <span class="dt">marginBottom</span><span class="op">:</span> <span class="dv">44</span><span class="op">,</span></span>
+<span id="cb6-357"><a href="#cb6-357" aria-hidden="true" tabindex="-1"></a>    <span class="dt">style</span><span class="op">:</span> { <span class="dt">background</span><span class="op">:</span> <span class="st">"transparent"</span><span class="op">,</span> <span class="dt">color</span><span class="op">:</span> TINTA<span class="op">,</span> <span class="dt">fontFamily</span><span class="op">:</span> <span class="st">"'Source Sans 3', system-ui, sans-serif"</span><span class="op">,</span> <span class="dt">fontSize</span><span class="op">:</span> <span class="st">"12.5px"</span> }<span class="op">,</span></span>
+<span id="cb6-358"><a href="#cb6-358" aria-hidden="true" tabindex="-1"></a>    <span class="dt">x</span><span class="op">:</span> { <span class="dt">label</span><span class="op">:</span> <span class="st">"Distância ao parque grande mais próximo (km) →"</span><span class="op">,</span> <span class="dt">domain</span><span class="op">:</span> [<span class="dv">0</span><span class="op">,</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">ceil</span>(maxKm)]<span class="op">,</span> <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span> }<span class="op">,</span></span>
+<span id="cb6-359"><a href="#cb6-359" aria-hidden="true" tabindex="-1"></a>    <span class="dt">y</span><span class="op">:</span> { <span class="dt">label</span><span class="op">:</span> <span class="st">"↑ Temperatura (°C)"</span><span class="op">,</span> <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span> <span class="dt">tickFormat</span><span class="op">:</span> (d) <span class="kw">=&gt;</span> <span class="fu">fmt</span>(d<span class="op">,</span> <span class="dv">0</span>) }<span class="op">,</span></span>
+<span id="cb6-360"><a href="#cb6-360" aria-hidden="true" tabindex="-1"></a>    <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb6-361"><a href="#cb6-361" aria-hidden="true" tabindex="-1"></a>      Plot<span class="op">.</span><span class="fu">dot</span>(setores<span class="op">,</span> { <span class="dt">x</span><span class="op">:</span> (d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">dist_park_m</span> <span class="op">/</span> <span class="dv">1000</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"temperatura"</span><span class="op">,</span> <span class="dt">r</span><span class="op">:</span> <span class="fl">1.8</span><span class="op">,</span></span>
+<span id="cb6-362"><a href="#cb6-362" aria-hidden="true" tabindex="-1"></a>        <span class="dt">fill</span><span class="op">:</span> (d) <span class="kw">=&gt;</span> (ativa<span class="op">.</span><span class="fu">has</span>(<span class="fu">faixaDe</span>(d<span class="op">.</span><span class="at">dist_park_m</span>)) <span class="op">?</span> TINTA <span class="op">:</span> <span class="st">"#3a3a3a"</span>)<span class="op">,</span></span>
+<span id="cb6-363"><a href="#cb6-363" aria-hidden="true" tabindex="-1"></a>        <span class="dt">fillOpacity</span><span class="op">:</span> (d) <span class="kw">=&gt;</span> (ativa<span class="op">.</span><span class="fu">has</span>(<span class="fu">faixaDe</span>(d<span class="op">.</span><span class="at">dist_park_m</span>)) <span class="op">?</span> <span class="fl">0.45</span> <span class="op">:</span> <span class="fl">0.25</span>) })<span class="op">,</span></span>
+<span id="cb6-364"><a href="#cb6-364" aria-hidden="true" tabindex="-1"></a>      Plot<span class="op">.</span><span class="fu">ruleX</span>([<span class="fl">0.5</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">4</span>]<span class="op">,</span> { <span class="dt">stroke</span><span class="op">:</span> <span class="st">"#555"</span><span class="op">,</span> <span class="dt">strokeDasharray</span><span class="op">:</span> <span class="st">"2,3"</span> })<span class="op">,</span></span>
+<span id="cb6-365"><a href="#cb6-365" aria-hidden="true" tabindex="-1"></a>      Plot<span class="op">.</span><span class="fu">ruleY</span>(selecionados<span class="op">,</span> { <span class="dt">y</span><span class="op">:</span> <span class="st">"media"</span><span class="op">,</span> <span class="dt">x1</span><span class="op">:</span> (d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">min</span> <span class="op">/</span> <span class="dv">1000</span><span class="op">,</span> <span class="dt">x2</span><span class="op">:</span> (d) <span class="kw">=&gt;</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">min</span>(d<span class="op">.</span><span class="at">max</span> <span class="op">/</span> <span class="dv">1000</span><span class="op">,</span> maxKm)<span class="op">,</span></span>
+<span id="cb6-366"><a href="#cb6-366" aria-hidden="true" tabindex="-1"></a>        <span class="dt">stroke</span><span class="op">:</span> DESTAQUE<span class="op">,</span> <span class="dt">strokeWidth</span><span class="op">:</span> <span class="dv">3</span> })<span class="op">,</span></span>
+<span id="cb6-367"><a href="#cb6-367" aria-hidden="true" tabindex="-1"></a>      Plot<span class="op">.</span><span class="fu">tip</span>(setores<span class="op">,</span> Plot<span class="op">.</span><span class="fu">pointer</span>({</span>
+<span id="cb6-368"><a href="#cb6-368" aria-hidden="true" tabindex="-1"></a>        <span class="dt">x</span><span class="op">:</span> (d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">dist_park_m</span> <span class="op">/</span> <span class="dv">1000</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"temperatura"</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">"#151515"</span><span class="op">,</span> <span class="dt">stroke</span><span class="op">:</span> <span class="st">"#444"</span><span class="op">,</span></span>
+<span id="cb6-369"><a href="#cb6-369" aria-hidden="true" tabindex="-1"></a>        <span class="dt">filter</span><span class="op">:</span> (d) <span class="kw">=&gt;</span> ativa<span class="op">.</span><span class="fu">has</span>(<span class="fu">faixaDe</span>(d<span class="op">.</span><span class="at">dist_park_m</span>))<span class="op">,</span></span>
+<span id="cb6-370"><a href="#cb6-370" aria-hidden="true" tabindex="-1"></a>        <span class="dt">title</span><span class="op">:</span> (d) <span class="kw">=&gt;</span> [</span>
+<span id="cb6-371"><a href="#cb6-371" aria-hidden="true" tabindex="-1"></a>          <span class="vs">`setor </span><span class="sc">${</span>d<span class="op">.</span><span class="at">sector_id</span><span class="sc">}</span><span class="vs">`</span><span class="op">,</span></span>
+<span id="cb6-372"><a href="#cb6-372" aria-hidden="true" tabindex="-1"></a>          <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(d<span class="op">.</span><span class="at">dist_park_m</span> <span class="op">/</span> <span class="dv">1000</span>)<span class="sc">}</span><span class="vs"> km do parque · </span><span class="sc">${</span><span class="fu">fmt</span>(d<span class="op">.</span><span class="at">temperatura</span>)<span class="sc">}</span><span class="vs"> °C`</span><span class="op">,</span></span>
+<span id="cb6-373"><a href="#cb6-373" aria-hidden="true" tabindex="-1"></a>          <span class="vs">`Q</span><span class="sc">${</span>d<span class="op">.</span><span class="at">quintil</span><span class="sc">}</span><span class="vs"> · renda mediana </span><span class="sc">${</span><span class="fu">fmtRenda</span>(d<span class="op">.</span><span class="at">income_median</span>)<span class="sc">}</span><span class="vs">`</span></span>
+<span id="cb6-374"><a href="#cb6-374" aria-hidden="true" tabindex="-1"></a>        ]<span class="op">.</span><span class="fu">join</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb6-375"><a href="#cb6-375" aria-hidden="true" tabindex="-1"></a>      }))</span>
+<span id="cb6-376"><a href="#cb6-376" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb6-377"><a href="#cb6-377" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb6-378"><a href="#cb6-378" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> tabela <span class="op">=</span> <span class="fu">html</span><span class="vs">`&lt;table class="tabela-numeros"&gt;</span></span>
+<span id="cb6-379"><a href="#cb6-379" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Faixa&lt;/th&gt;&lt;th&gt;Setores&lt;/th&gt;&lt;th&gt;Temperatura média&lt;/th&gt;&lt;th&gt;Mediana&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;</span></span>
+<span id="cb6-380"><a href="#cb6-380" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;tbody&gt;</span><span class="sc">${</span>selecionados<span class="op">.</span><span class="fu">map</span>((f) <span class="kw">=&gt;</span> <span class="fu">html</span><span class="vs">`&lt;tr&gt;&lt;td&gt;</span><span class="sc">${</span>f<span class="op">.</span><span class="at">rotulo</span><span class="sc">}</span><span class="vs">&lt;/td&gt;&lt;td&gt;</span><span class="sc">${</span><span class="fu">fmtInt</span>(f<span class="op">.</span><span class="at">n</span>)<span class="sc">}</span><span class="vs">&lt;/td&gt;&lt;td&gt;</span><span class="sc">${</span><span class="fu">fmt</span>(f<span class="op">.</span><span class="at">media</span>)<span class="sc">}</span><span class="vs"> °C&lt;/td&gt;&lt;td&gt;</span><span class="sc">${</span><span class="fu">fmt</span>(f<span class="op">.</span><span class="at">mediana</span>)<span class="sc">}</span><span class="vs"> °C&lt;/td&gt;&lt;/tr&gt;`</span>)<span class="sc">}</span><span class="vs">&lt;/tbody&gt;</span></span>
+<span id="cb6-381"><a href="#cb6-381" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/table&gt;`</span><span class="op">;</span></span>
+<span id="cb6-382"><a href="#cb6-382" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="fu">html</span><span class="vs">`&lt;div&gt;</span><span class="sc">${</span>grafico<span class="sc">}</span></span>
+<span id="cb6-383"><a href="#cb6-383" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;p class="legenda-grafico"&gt;Cada ponto é um setor. Os traços na cor de destaque são a temperatura média de cada faixa selecionada. Desmarque faixas para compará-las; passe o mouse sobre um ponto para ver o setor.&lt;/p&gt;</span></span>
+<span id="cb6-384"><a href="#cb6-384" aria-hidden="true" tabindex="-1"></a><span class="vs">    </span><span class="sc">${</span>tabela<span class="sc">}</span><span class="vs">&lt;/div&gt;`</span><span class="op">;</span></span>
+<span id="cb6-385"><a href="#cb6-385" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display column-page">
+<div id="ojs-cell-6" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<p>Como os parques estão mais perto dos setores de maior renda, o benefício de frescor também se distribui de forma desigual.</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p class="page-columns page-full"><a href="figures/p5_renda_distancia_lado_a_lado.png" class="lightbox page-columns page-full" data-gallery="quarto-lightbox-gallery-2" title="Distância ao parque grande por faixa de renda."><img src="figures/p5_renda_distancia_lado_a_lado.png" class="column-page img-fluid figure-img" alt="Distância ao parque grande por faixa de renda."></a></p>
+<figcaption>Distância ao parque grande por faixa de renda.</figcaption>
+</figure>
+</div>
+<p><strong>Estar perto não quer dizer <em>por causa</em>.</strong> Setores vizinhos de parques podem ter outras características em comum, como o padrão de ocupação, que também pesam na temperatura. Mesmo assim, o padrão é firme: ele continua praticamente igual quando saem da conta os setores que têm um parque dentro dos seus limites.</p>
+<!-- faixa: recorte de p6_setores_prioritarios.png -->
+<div class="faixa column-screen">
+  <div class="faixa-fundo" data-parallax="0.12">
+    <img src="assets/img/faixa_prioritarios.jpg" loading="lazy" decoding="async" alt="Mapa de Goiânia com os setores prioritários em vermelho sobre os demais em cinza; os parques grandes aparecem em contorno claro.">
+  </div>
+  <p class="faixa-legenda">Em vermelho, os setores prioritários; em contorno claro, os parques grandes.</p>
+</div>
+</section>
+<section id="onde-agir-primeiro" class="level2 secao-acao page-columns page-full" data-number="5">
+<h2 class="secao-acao anchored" data-number="5" data-anchor-id="onde-agir-primeiro"><span class="header-section-number">5</span> Onde agir primeiro</h2>
+<div class="acao-abertura">
+<p><span class="acao-numero"><span><span id="ojs-element-id-16"></span></span></span></p>
+<p><span class="acao-frase">setores reúnem, <strong>ao mesmo tempo</strong>, renda baixa, calor alto e nenhum parque grande por perto. São <span><span id="ojs-element-id-17"></span>%</span> dos setores da cidade e os candidatos a receber ação primeiro.</span></p>
+</div>
+<p>Para transformar o diagnóstico em prioridade, cada setor marcado atende às três condições:</p>
+<div class="condicoes">
+<div class="condicao">
+<p><span class="condicao-rotulo">Renda</span> <span class="condicao-valor">Q1 ou Q2</span> <span class="condicao-nota">os dois grupos de renda mais baixa</span></p>
+</div>
+<div class="condicao">
+<p><span class="condicao-rotulo">Calor</span> <span class="condicao-valor">acima de <span><span id="ojs-element-id-18"></span></span> °C</span> <span class="condicao-nota">percentil 75 de toda a cidade</span></p>
+</div>
+<div class="condicao">
+<p><span class="condicao-rotulo">Acesso</span> <span class="condicao-valor">mais de 2 km</span> <span class="condicao-nota">até o parque grande mais próximo</span></p>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb7" data-startfrom="437" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 436;"><span id="cb7-437"><a href="#cb7-437" aria-hidden="true" tabindex="-1"></a>nPrio <span class="op">===</span> ESPERADO_PRIO</span>
+<span id="cb7-438"><a href="#cb7-438" aria-hidden="true" tabindex="-1"></a>  <span class="op">?</span> <span class="fu">html</span><span class="vs">``</span></span>
+<span id="cb7-439"><a href="#cb7-439" aria-hidden="true" tabindex="-1"></a>  <span class="op">:</span> <span class="fu">html</span><span class="vs">`&lt;p class="aviso"&gt;Atenção: o critério deu </span><span class="sc">${</span>nPrio<span class="sc">}</span><span class="vs"> setores, e não </span><span class="sc">${</span>ESPERADO_PRIO<span class="sc">}</span><span class="vs"> como no notebook 06. Confira os dados em &lt;code&gt;site/data/&lt;/code&gt;.&lt;/p&gt;`</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-7" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<p>Esse critério é uma <strong>escolha explícita</strong>, feita para orientar onde olhar primeiro, e não um diagnóstico definitivo. No simulador abaixo, você pode mudar cada uma das três condições e ver como o conjunto muda. Ao abrir, ele reproduz o critério do estudo.</p>
+<div class="cell page-columns page-full">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb8" data-startfrom="447" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 446;"><span id="cb8-447"><a href="#cb8-447" aria-hidden="true" tabindex="-1"></a>viewof simQuintis <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">checkbox</span>([<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span>]<span class="op">,</span> { <span class="dt">label</span><span class="op">:</span> <span class="st">"Grupos de renda incluídos"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span>]<span class="op">,</span> <span class="dt">format</span><span class="op">:</span> (q) <span class="kw">=&gt;</span> <span class="vs">`Q</span><span class="sc">${</span>q<span class="sc">}</span><span class="vs">`</span> })</span>
+<span id="cb8-448"><a href="#cb8-448" aria-hidden="true" tabindex="-1"></a>viewof simPercentil <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="dv">50</span><span class="op">,</span> <span class="dv">95</span>]<span class="op">,</span> { <span class="dt">label</span><span class="op">:</span> <span class="st">"Temperatura acima do percentil"</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">75</span> })</span>
+<span id="cb8-449"><a href="#cb8-449" aria-hidden="true" tabindex="-1"></a>viewof simDistancia <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="dv">0</span><span class="op">,</span> <span class="dv">5000</span>]<span class="op">,</span> { <span class="dt">label</span><span class="op">:</span> <span class="st">"Distância mínima a parque grande (m)"</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">100</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">2000</span> })</span>
+<span id="cb8-450"><a href="#cb8-450" aria-hidden="true" tabindex="-1"></a>viewof simReiniciar <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">button</span>(<span class="st">"Voltar ao critério do estudo"</span><span class="op">,</span> {</span>
+<span id="cb8-451"><a href="#cb8-451" aria-hidden="true" tabindex="-1"></a>  <span class="dt">reduce</span><span class="op">:</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb8-452"><a href="#cb8-452" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> definir <span class="op">=</span> (v<span class="op">,</span> valor) <span class="kw">=&gt;</span> { v<span class="op">.</span><span class="at">value</span> <span class="op">=</span> valor<span class="op">;</span> v<span class="op">.</span><span class="fu">dispatchEvent</span>(<span class="kw">new</span> <span class="bu">Event</span>(<span class="st">"input"</span><span class="op">,</span> { <span class="dt">bubbles</span><span class="op">:</span> <span class="kw">true</span> }))<span class="op">;</span> }<span class="op">;</span></span>
+<span id="cb8-453"><a href="#cb8-453" aria-hidden="true" tabindex="-1"></a>    <span class="fu">definir</span>(viewof simQuintis<span class="op">,</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span>])<span class="op">;</span></span>
+<span id="cb8-454"><a href="#cb8-454" aria-hidden="true" tabindex="-1"></a>    <span class="fu">definir</span>(viewof simPercentil<span class="op">,</span> <span class="dv">75</span>)<span class="op">;</span></span>
+<span id="cb8-455"><a href="#cb8-455" aria-hidden="true" tabindex="-1"></a>    <span class="fu">definir</span>(viewof simDistancia<span class="op">,</span> <span class="dv">2000</span>)<span class="op">;</span></span>
+<span id="cb8-456"><a href="#cb8-456" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-457"><a href="#cb8-457" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display column-page">
+<div>
+<div id="ojs-cell-8-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-8-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-8-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-8-4" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
+<div class="cell hidden">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb9" data-startfrom="462" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 461;"><span id="cb9-462"><a href="#cb9-462" aria-hidden="true" tabindex="-1"></a>simLimiar <span class="op">=</span> d3<span class="op">.</span><span class="fu">quantile</span>(setores<span class="op">,</span> simPercentil <span class="op">/</span> <span class="dv">100</span><span class="op">,</span> (d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">temperatura</span>)</span>
+<span id="cb9-463"><a href="#cb9-463" aria-hidden="true" tabindex="-1"></a>simIds <span class="op">=</span> <span class="kw">new</span> <span class="bu">Set</span>(setores<span class="op">.</span><span class="fu">filter</span>((d) <span class="kw">=&gt;</span> <span class="fu">ehPrioritario</span>(d<span class="op">,</span> simQuintis<span class="op">,</span> simLimiar<span class="op">,</span> simDistancia))<span class="op">.</span><span class="fu">map</span>((d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">sector_id</span>))</span>
+<span id="cb9-464"><a href="#cb9-464" aria-hidden="true" tabindex="-1"></a>simComuns <span class="op">=</span> [<span class="op">...</span>simIds]<span class="op">.</span><span class="fu">filter</span>((id) <span class="kw">=&gt;</span> idsPrioritarios<span class="op">.</span><span class="fu">has</span>(id))<span class="op">.</span><span class="at">length</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-9-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-9-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-9-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
+<div class="cell page-columns page-full">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb10" data-startfrom="468" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 467;"><span id="cb10-468"><a href="#cb10-468" aria-hidden="true" tabindex="-1"></a><span class="fu">html</span><span class="vs">`&lt;p class="contador" aria-live="polite"&gt;&lt;span class="big"&gt;</span><span class="sc">${</span><span class="fu">fmtInt</span>(simIds<span class="op">.</span><span class="at">size</span>)<span class="sc">}</span><span class="vs">&lt;/span&gt; setores</span></span>
+<span id="cb10-469"><a href="#cb10-469" aria-hidden="true" tabindex="-1"></a><span class="vs">  (</span><span class="sc">${</span><span class="fu">fmt</span>((<span class="dv">100</span> <span class="op">*</span> simIds<span class="op">.</span><span class="at">size</span>) <span class="op">/</span> setores<span class="op">.</span><span class="at">length</span>)<span class="sc">}</span><span class="vs">% do total) · limiar de temperatura </span><span class="sc">${</span><span class="fu">fmt</span>(simLimiar)<span class="sc">}</span><span class="vs"> °C ·</span></span>
+<span id="cb10-470"><a href="#cb10-470" aria-hidden="true" tabindex="-1"></a><span class="vs">  </span><span class="sc">${</span><span class="fu">fmtInt</span>(simComuns)<span class="sc">}</span><span class="vs"> em comum com o critério do estudo, </span><span class="sc">${</span><span class="fu">fmtInt</span>(simIds<span class="op">.</span><span class="at">size</span> <span class="op">-</span> simComuns)<span class="sc">}</span><span class="vs"> novos,</span></span>
+<span id="cb10-471"><a href="#cb10-471" aria-hidden="true" tabindex="-1"></a><span class="vs">  </span><span class="sc">${</span><span class="fu">fmtInt</span>(nPrio <span class="op">-</span> simComuns)<span class="sc">}</span><span class="vs"> saíram&lt;/p&gt;`</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display column-page">
+<div id="ojs-cell-10" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<div id="mapa-simulador" class="mapa column-page">
+
+</div>
+<div class="cell hidden">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb11" data-startfrom="479" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 478;"><span id="cb11-479"><a href="#cb11-479" aria-hidden="true" tabindex="-1"></a>mapaSimulador <span class="op">=</span> (<span class="cf">await</span> mapaLib)<span class="op">.</span><span class="fu">criarMapa</span>(<span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">"mapa-simulador"</span>)<span class="op">,</span> {</span>
+<span id="cb11-480"><a href="#cb11-480" aria-hidden="true" tabindex="-1"></a>  <span class="dt">setores</span><span class="op">:</span> setoresGeo<span class="op">,</span> <span class="dt">parques</span><span class="op">:</span> parquesGeo<span class="op">,</span> <span class="dt">camada</span><span class="op">:</span> <span class="st">"simulacao"</span><span class="op">,</span> paradasTemp<span class="op">,</span> faixasRenda<span class="op">,</span> idsPrioritarios</span>
+<span id="cb11-481"><a href="#cb11-481" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb11-482"><a href="#cb11-482" aria-hidden="true" tabindex="-1"></a>atualizaSimulador <span class="op">=</span> mapaSimulador<span class="op">.</span><span class="fu">definirConjunto</span>(<span class="st">"sim"</span><span class="op">,</span> simIds)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-11-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-11-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><strong>Como usar o simulador:</strong> marque ou desmarque grupos de renda, mova os controles de temperatura e distância e veja o mapa e a contagem mudarem. As linhas tracejadas mostram setores que estavam no critério do estudo e saíram com a sua escolha.</p>
+</div></div><p>Ao variar os limites (percentil, distância, grupos de renda), o conjunto muda de tamanho, mas as manchas principais permanecem.</p>
+</section>
+<section id="explore-o-mapa" class="level2 page-columns page-full" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="explore-o-mapa"><span class="header-section-number">6</span> Explore o mapa</h2>
+<p>Troque a camada, passe o mouse para ver o valor de cada setor e clique em um setor para ver todos os dados dele. No celular, toque no setor. Para dar zoom, use os botões, Ctrl + rolagem ou dois dedos.</p>
+<div class="cell page-columns page-full">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb12" data-startfrom="496" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 495;"><span id="cb12-496"><a href="#cb12-496" aria-hidden="true" tabindex="-1"></a>viewof camada <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">radio</span>(</span>
+<span id="cb12-497"><a href="#cb12-497" aria-hidden="true" tabindex="-1"></a>  <span class="kw">new</span> <span class="bu">Map</span>([</span>
+<span id="cb12-498"><a href="#cb12-498" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"Temperatura"</span><span class="op">,</span> <span class="st">"temperatura"</span>]<span class="op">,</span></span>
+<span id="cb12-499"><a href="#cb12-499" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"Quintil de renda"</span><span class="op">,</span> <span class="st">"quintil"</span>]<span class="op">,</span></span>
+<span id="cb12-500"><a href="#cb12-500" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"Distância ao parque"</span><span class="op">,</span> <span class="st">"distancia"</span>]<span class="op">,</span></span>
+<span id="cb12-501"><a href="#cb12-501" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"Setores prioritários"</span><span class="op">,</span> <span class="st">"prioridade"</span>]</span>
+<span id="cb12-502"><a href="#cb12-502" aria-hidden="true" tabindex="-1"></a>  ])<span class="op">,</span></span>
+<span id="cb12-503"><a href="#cb12-503" aria-hidden="true" tabindex="-1"></a>  { <span class="dt">value</span><span class="op">:</span> <span class="st">"temperatura"</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Camada"</span> }</span>
+<span id="cb12-504"><a href="#cb12-504" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display column-page">
+<div id="ojs-cell-12" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div id="mapa-explorar" class="mapa column-page">
+
+</div>
+<div class="cell hidden">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb13" data-startfrom="512" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 511;"><span id="cb13-512"><a href="#cb13-512" aria-hidden="true" tabindex="-1"></a>mapaExplorar <span class="op">=</span> (<span class="cf">await</span> mapaLib)<span class="op">.</span><span class="fu">criarMapa</span>(<span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">"mapa-explorar"</span>)<span class="op">,</span> {</span>
+<span id="cb13-513"><a href="#cb13-513" aria-hidden="true" tabindex="-1"></a>  <span class="dt">setores</span><span class="op">:</span> setoresGeo<span class="op">,</span> <span class="dt">parques</span><span class="op">:</span> parquesGeo<span class="op">,</span> <span class="dt">camada</span><span class="op">:</span> <span class="st">"temperatura"</span><span class="op">,</span> paradasTemp<span class="op">,</span> faixasRenda<span class="op">,</span> idsPrioritarios</span>
+<span id="cb13-514"><a href="#cb13-514" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb13-515"><a href="#cb13-515" aria-hidden="true" tabindex="-1"></a>trocaCamada <span class="op">=</span> mapaExplorar<span class="op">.</span><span class="fu">mostrarCamada</span>(camada)</span>
+<span id="cb13-516"><a href="#cb13-516" aria-hidden="true" tabindex="-1"></a>destaqueQuintil <span class="op">=</span> mapaExplorar<span class="op">.</span><span class="fu">destacarQuintil</span>(quintilClicado)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-13-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-13-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-13-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
+<div class="cell page-columns page-full">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb14" data-startfrom="520" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 519;"><span id="cb14-520"><a href="#cb14-520" aria-hidden="true" tabindex="-1"></a>quintilClicado</span>
+<span id="cb14-521"><a href="#cb14-521" aria-hidden="true" tabindex="-1"></a>  <span class="op">?</span> <span class="fu">html</span><span class="vs">`&lt;p class="legenda-grafico"&gt;Contorno claro: setores do &lt;strong&gt;Q</span><span class="sc">${</span>quintilClicado<span class="sc">}</span><span class="vs">&lt;/strong&gt;, escolhidos no gráfico de grupos de renda. Clique de novo no mesmo grupo para limpar.&lt;/p&gt;`</span></span>
+<span id="cb14-522"><a href="#cb14-522" aria-hidden="true" tabindex="-1"></a>  <span class="op">:</span> <span class="fu">html</span><span class="vs">``</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display column-page">
+<div id="ojs-cell-14" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</section>
+<section id="os-dados" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="os-dados"><span class="header-section-number">7</span> Os dados</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -187,220 +984,186 @@ background-size: cover;
 <tr class="header">
 <th>O que</th>
 <th>De onde</th>
-<th>Como entrou</th>
+<th>Como entrou na análise</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>Temperatura da superfície</td>
-<td>Satélites Landsat 8 e 9 (banda térmica), ago–set 2026</td>
-<td>Média por setor</td>
+<td>Landsat 8 e 9, banda térmica, ago–set 2026</td>
+<td>Temperatura de brilho média por setor, em °C</td>
 </tr>
 <tr class="even">
+<td>Vegetação (NDVI)</td>
+<td>Landsat 8 e 9, refletância de superfície (nível 2), mesmas datas</td>
+<td>NDVI médio por setor</td>
+</tr>
+<tr class="odd">
 <td>Renda</td>
-<td>Censo 2022, IBGE (renda do responsável pelo domicílio)</td>
-<td>Mediana por setor</td>
+<td>IBGE, Censo 2022</td>
+<td>Rendimento mediano dos responsáveis com rendimento, já divulgado pelo IBGE para cada setor</td>
+</tr>
+<tr class="even">
+<td>Setores</td>
+<td>IBGE, malha de setores censitários 2022</td>
+<td>Unidade de análise: <span><span id="ojs-element-id-19"></span></span> setores urbanos, após a máscara urbana</td>
 </tr>
 <tr class="odd">
 <td>Cobertura do solo</td>
-<td>ESA WorldCover 2021</td>
-<td>% de árvores, construído, grama e solo exposto</td>
+<td>ESA WorldCover 2021, 10 m</td>
+<td>% da área do setor com árvores, área construída, grama e solo exposto</td>
 </tr>
 <tr class="even">
 <td>Altitude</td>
-<td>SRTM</td>
-<td>Média por setor</td>
+<td>SRTM, 30 m</td>
+<td>Altitude média por setor, usada como controle no modelo de regressão</td>
 </tr>
 <tr class="odd">
 <td>Parques</td>
-<td>OpenStreetMap, áreas acima de 10 ha (19 parques)</td>
-<td>Distância do centro do setor ao parque mais próximo</td>
-</tr>
-<tr class="even">
-<td>Unidade de análise</td>
-<td>Setores censitários urbanos (IBGE)</td>
-<td>2.226 setores após aplicar a máscara urbana</td>
+<td>OpenStreetMap, parques acima de 10 ha <span>(<span id="ojs-element-id-20"></span></span> polígonos)</td>
+<td>Distância do centroide do setor ao parque grande mais próximo</td>
 </tr>
 </tbody>
 </table>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p><strong>Setor censitário:</strong> a menor área para a qual o IBGE divulga dados de renda. Em Goiânia, cada setor tem em geral algumas centenas de domicílios.</p>
-</div></div><div class="callout callout-style-default callout-note callout-titled">
+<p><strong>Ferramentas.</strong> O <strong>Google Earth Engine</strong> acessou e processou as imagens Landsat, o SRTM e o WorldCover e calculou as estatísticas de cada setor. Em <strong>Python</strong>, com GeoPandas, pandas e OSMnx, as camadas foram organizadas, as informações cruzadas e as áreas e distâncias calculadas; a correlação de Spearman, a regressão e a estatística espacial (Moran’s I) também foram feitas em Python. O <strong>Quarto</strong>, com Observable JS e MapLibre, monta esta página.</p>
+</section>
+<section id="passo-a-passo-da-análise" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="passo-a-passo-da-análise"><span class="header-section-number">8</span> Passo a passo da análise</h2>
+<ol type="1">
+<li><strong>Recorte da área urbana.</strong> Uma máscara retirou zonas rurais e vazios que distorcem a média de um setor.</li>
+<li><strong>Cálculo da temperatura média de cada setor</strong> a partir das imagens de satélite.</li>
+<li><strong>União de renda, cobertura do solo, altitude e distância a parques</strong> na mesma tabela, uma linha por setor.</li>
+<li><strong>Divisão dos setores em cinco grupos de renda (quintis)</strong>, da renda mais baixa (Q1) à mais alta (Q5).</li>
+<li><strong>Comparação da temperatura entre os grupos</strong>, com um teste para ver se a diferença se mantém depois de controlar por vegetação, área construída, altitude e parques.</li>
+<li><strong>Marcação dos setores prioritários</strong> com um critério explícito, com um teste de sensibilidade a esse critério.</li>
+</ol>
+</section>
+<section id="limites" class="level2" data-number="9">
+<h2 data-number="9" class="anchored" data-anchor-id="limites"><span class="header-section-number">9</span> Limites</h2>
+<div class="limites">
+<ul>
+<li><strong>Associação, não causa.</strong> A análise mostra onde calor, verde e renda se encontram, não que a renda cause o calor.</li>
+<li><strong>Superfície, não ar.</strong> A temperatura de brilho mede o calor da superfície vista pelo satélite. Serve para comparar setores entre si, não equivale à temperatura do ar nem à sensação térmica.</li>
+<li><strong>Datas diferentes.</strong> A renda é do Censo 2022; as imagens são de agosto e setembro de 2026, no período seco.</li>
+<li><strong>Renda do responsável.</strong> O indicador é a renda do responsável pelo domicílio, não a de todos os moradores.</li>
+<li><strong>Um valor por setor.</strong> A média do setor esconde diferenças rua a rua, e setores muito pequenos têm valores menos confiáveis.</li>
+</ul>
+</div>
+</section>
+<section id="glossário" class="level2" data-number="10">
+<h2 data-number="10" class="anchored" data-anchor-id="glossário"><span class="header-section-number">10</span> Glossário</h2>
+<dl>
+<dt>Setor censitário</dt>
+<dd>
+A menor área para a qual o IBGE divulga dados de renda do Censo.
+</dd>
+<dt>Quintil</dt>
+<dd>
+Cada um dos cinco grupos em que os setores foram divididos pela renda mediana, do Q1 (renda mais baixa) ao Q5 (mais alta). É uma posição relativa, não uma linha oficial de pobreza.
+</dd>
+<dt>Temperatura de superfície</dt>
+<dd>
+Temperatura do material visto de cima pelo satélite (telhado, asfalto, solo, copa das árvores). Não é a temperatura do ar.
+</dd>
+<dt>NDVI</dt>
+<dd>
+Índice de vegetação calculado com as bandas do vermelho e do infravermelho próximo. Quanto mais alto, mais vegetação verde e ativa.
+</dd>
+<dt>Mediana</dt>
+<dd>
+O valor do meio quando os setores são ordenados. Metade fica abaixo e metade acima; é menos sensível a extremos do que a média.
+</dd>
+<dt>Percentil</dt>
+<dd>
+O percentil 75 da temperatura é o valor abaixo do qual estão 75% dos setores.
+</dd>
+<dt>Correlação de Spearman</dt>
+<dd>
+Mede se duas variáveis sobem ou descem juntas, usando a ordem dos valores. Vai de −1 a 1; valores negativos indicam que, quando uma sobe, a outra tende a descer.
+</dd>
+<dt>Regressão (OLS)</dt>
+<dd>
+Modelo que estima quanto a temperatura muda com a renda quando outras variáveis (vegetação, área construída, altitude) ficam constantes.
+</dd>
+<dt>Autocorrelação espacial (I de Moran)</dt>
+<dd>
+Tendência de setores vizinhos terem valores parecidos. Quando é forte, os testes estatísticos comuns parecem mais precisos do que são.
+</dd>
+<dt>Parque grande</dt>
+<dd>
+Área de parque do OpenStreetMap com mais de 10 hectares.
+</dd>
+<dt>Justiça ambiental</dt>
+<dd>
+Ideia de que os benefícios e os prejuízos ambientais não deveriam se concentrar em grupos sociais específicos.
+</dd>
+</dl>
+</section>
+<section id="referências" class="level2" data-number="11">
+<h2 data-number="11" class="anchored" data-anchor-id="referências"><span class="header-section-number">11</span> Referências</h2>
+<div class="referencias">
+<p>Foli, A. C. A. (2026). <em>Produção do espaço urbano, ilhas de calor e vulnerabilidade em Goiânia (GO): uma contribuição aos estudos da Geografia do Clima</em>. Tese de doutorado, Universidade Federal de Goiás. Repositório UFG. <span class="ref-nota">Principal referência local.</span></p>
+<p>Hsu, A., Sheriff, G., Chakraborty, T., &amp; Manya, D. (2021). Disproportionate exposure to urban heat island intensity across major US cities. <em>Nature Communications</em>, 12, 2721. <a href="https://doi.org/10.1038/s41467-021-22799-5" class="uri">https://doi.org/10.1038/s41467-021-22799-5</a> <span class="ref-nota">Referência metodológica para relacionar calor e características socioeconômicas.</span></p>
+<p>Sousa, S. B. de, &amp; Ferreira, L. G. (2012). Análise da temperatura de superfície em ambientes urbanos: um estudo por meio de sensoriamento remoto no município de Goiânia, Goiás (2002–2011). <em>Confins</em>, 15. <a href="https://doi.org/10.4000/confins.7631" class="uri">https://doi.org/10.4000/confins.7631</a></p>
+</div>
+<div class="codigo-aberto">
+<p><strong>Código aberto.</strong> Os notebooks, os scripts e a tabela por setor estão em <a href="https://github.com/HannahGrecco/goiania-thermal-justice">github.com/HannahGrecco/goiania-thermal-justice</a>.</p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span>Como o satélite mede a temperatura
+<span class="screen-reader-only">Nota</span>Figuras estáticas
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Usamos a <strong>temperatura de brilho</strong> da banda térmica do Landsat: a temperatura da <em>superfície</em> (telhado, asfalto, solo, copa de árvore), e não do ar que respiramos. Ela é útil para comparar áreas da mesma cidade, mas não equivale ao termômetro do dia a dia. Tentamos primeiro o produto de temperatura de superfície corrigido (nível 2), mas ele falhou em 513 setores, então usamos o produto de nível 1, que cobre todos. A janela é de agosto e setembro de 2026, no período seco do Cerrado.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="o-que-fizemos-passo-a-passo" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="o-que-fizemos-passo-a-passo"><span class="header-section-number">3</span> O que fizemos, passo a passo</h2>
-<ol type="1">
-<li><strong>Recortamos a área urbana.</strong> Aplicamos uma máscara para tirar zonas rurais e vazios que distorcem a média de um setor.</li>
-<li><strong>Calculamos a temperatura média de cada setor</strong> a partir das imagens de satélite.</li>
-<li><strong>Juntamos renda, cobertura do solo, altitude e distância a parques</strong> na mesma tabela, uma linha por setor.</li>
-<li><strong>Dividimos os setores em cinco grupos de renda (quintis)</strong>, do mais pobre (Q1) ao mais rico (Q5).</li>
-<li><strong>Comparamos a temperatura entre os grupos</strong> e testamos se a diferença se mantém depois de controlar por vegetação, área construída, altitude e parques.</li>
-<li><strong>Marcamos os setores prioritários</strong> com um critério explícito e testamos a sensibilidade a ele.</li>
-</ol>
-</section>
-<section id="só-os-mais-ricos-têm-um-bairro-mais-fresco" class="level2 page-columns page-full" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="só-os-mais-ricos-têm-um-bairro-mais-fresco"><span class="header-section-number">4</span> Só os mais ricos têm um bairro mais fresco</h2>
-<div class="pull">
-<p>Entre cinco grupos de renda, só o mais rico escapa do calor.</p>
-</div>
-<p>Os grupos Q1 a Q4 têm temperatura muito parecida: a mediana de cada um fica em torno de 31 °C. Só o Q5 se separa, cerca de <span class="big">1,15 °C</span> abaixo da média dos outros quatro.</p>
+<p>Versões em imagem dos principais gráficos e mapas, para consulta rápida, impressão ou uso em apresentações. Clique para ampliar.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="figures/p6_temperatura_quintil.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Temperatura de superfície por quintil de renda. O ponto vermelho é a média; a caixa mostra onde estão os 50% do meio dos setores."><img src="figures/p6_temperatura_quintil.png" class="img-fluid figure-img" alt="Temperatura de superfície por quintil de renda. O ponto vermelho é a média; a caixa mostra onde estão os 50% do meio dos setores."></a></p>
+<p><a href="figures/p6_temperatura_quintil.png" class="lightbox" data-gallery="figuras" title="Temperatura de superfície por quintil de renda. O ponto vermelho é a média; a caixa mostra onde estão os 50% do meio dos setores."><img src="figures/p6_temperatura_quintil.png" class="img-fluid figure-img" alt="Temperatura de superfície por quintil de renda. O ponto vermelho é a média; a caixa mostra onde estão os 50% do meio dos setores."></a></p>
 <figcaption>Temperatura de superfície por quintil de renda. O ponto vermelho é a média; a caixa mostra onde estão os 50% do meio dos setores.</figcaption>
 </figure>
 </div>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p><strong>Como ler o gráfico:</strong> cada caixa é um grupo de renda. A linha dentro é a mediana, a caixa cobre a metade central dos setores, e os pontos soltos são setores muito diferentes da média do grupo.</p>
-</div></div><p>Isso quer dizer que <strong>não existe uma escada</strong> em que cada aumento de renda traz um pouco de frescor. A vantagem está concentrada no topo.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span>Detalhe técnico: quintis
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Os quintis são relativos: dividem os setores em cinco grupos de tamanho parecido pela renda mediana. Como muitos setores têm a mesma renda, os grupos não ficam exatamente iguais. A correlação de Spearman entre renda e temperatura é de cerca de −0,31, uma associação moderada.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="não-é-só-falta-de-árvore" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="não-é-só-falta-de-árvore"><span class="header-section-number">5</span> Não é só falta de árvore</h2>
-<div class="pull">
-<p>A explicação mais óbvia, “bairro pobre tem menos árvore”, não se sustenta na média.</p>
-</div>
-<p>Nossa hipótese inicial era que os bairros de renda baixa teriam menos vegetação e mais área construída, e por isso seriam mais quentes. Os dados <strong>não confirmaram isso na média</strong>: o grupo mais pobre tem até mais árvores e menos área construída do que os grupos intermediários.</p>
-<p>Testamos também se o solo exposto e a grama seca explicariam a diferença, e essa explicação também não se sustentou. A vantagem do grupo mais rico <strong>continua</strong> depois de levar em conta vegetação, área construída, solo, altitude e distância a parques.</p>
-<p>O que isso sugere, sem provar: a composição do solo medida em 10 metros não captura tudo. Telhados, materiais, verticalização e a forma da cidade também importam.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span>Detalhe técnico: regressão e limites
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Estimamos um modelo de regressão (OLS) com a temperatura como resposta e renda padronizada, cobertura do solo e altitude como controles. O coeficiente da renda padronizada fica entre −0,43 e −0,48 °C por desvio-padrão, dependendo dos controles. A colinearidade é baixa (VIF = 3,5). Os resíduos têm forte autocorrelação espacial (Moran’s I = 0,68), então os erros-padrão são otimistas e <strong>não usamos valores de p</strong>.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="parques-perto-é-mais-fresco-mas-nem-todos-estão-perto" class="level2 page-columns page-full" data-number="6">
-<h2 data-number="6" class="anchored" data-anchor-id="parques-perto-é-mais-fresco-mas-nem-todos-estão-perto"><span class="header-section-number">6</span> Parques: perto é mais fresco, mas nem todos estão perto</h2>
-<div class="pull">
-<p>0,9 km de um parque para os mais ricos. 3,1 km para os mais pobres.</p>
-</div>
-<p>Usamos os 19 parques acima de 10 hectares. Os setores mais próximos tendem a ser mais frescos, com uma diferença de cerca de <strong>1 °C</strong> entre os setores a menos de 500 m e os que ficam entre 2 e 4 km. Essa relação não continua além de cerca de 4 km.</p>
-<p>Como os parques estão mais perto dos bairros ricos, o benefício de frescor também se distribui de forma desigual.</p>
-<div class="columns column-page">
-<div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="figures/p5_renda_distancia_lado_a_lado.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Distância ao parque grande por faixa de renda."><img src="figures/p5_renda_distancia_lado_a_lado.png" class="img-fluid figure-img" alt="Distância ao parque grande por faixa de renda."></a></p>
-<figcaption>Distância ao parque grande por faixa de renda.</figcaption>
-</figure>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="figures/p5_temp_por_faixa_parque.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Temperatura por faixa de distância ao parque."><img src="figures/p5_temp_por_faixa_parque.png" class="img-fluid figure-img" alt="Temperatura por faixa de distância ao parque."></a></p>
+<p><a href="figures/p5_temp_por_faixa_parque.png" class="lightbox" data-gallery="figuras" title="Temperatura por faixa de distância ao parque."><img src="figures/p5_temp_por_faixa_parque.png" class="img-fluid figure-img" alt="Temperatura por faixa de distância ao parque."></a></p>
 <figcaption>Temperatura por faixa de distância ao parque.</figcaption>
 </figure>
 </div>
-</div>
-</div>
-<p>Não afirmamos que o parque <em>causa</em> o frescor: setores perto de parques também podem ter outras características em comum. A associação é consistente e se mantém ao excluirmos os setores que contêm um parque, mas é uma associação.</p>
-</section>
-<section id="onde-agir-primeiro" class="level2 page-columns page-full" data-number="7">
-<h2 data-number="7" class="anchored" data-anchor-id="onde-agir-primeiro"><span class="header-section-number">7</span> Onde agir primeiro</h2>
-<p>Para transformar o diagnóstico em prioridade, marcamos <span class="big">225</span> setores (10,1% do total) que atendem a <strong>três condições ao mesmo tempo</strong>:</p>
-<ul>
-<li>renda baixa (grupos Q1 ou Q2),</li>
-<li>temperatura acima do percentil 75 de toda a cidade,</li>
-<li>mais de 2 km de distância de um parque grande.</li>
-</ul>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p class="page-columns page-full"><a href="figures/p6_setores_prioritarios.png" class="lightbox page-columns page-full" data-gallery="quarto-lightbox-gallery-5" title="Setores prioritários (vermelho) e parques grandes (contorno azul). Os prioritários se concentram em manchas no centro-norte, no leste e em algumas bordas a oeste."><img src="figures/p6_setores_prioritarios.png" class="column-page img-fluid figure-img" alt="Setores prioritários (vermelho) e parques grandes (contorno azul). Os prioritários se concentram em manchas no centro-norte, no leste e em algumas bordas a oeste."></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="figures/p6_setores_prioritarios.png" class="lightbox" data-gallery="figuras" title="Setores prioritários (vermelho) e parques grandes (contorno azul). Os prioritários se concentram em manchas no centro-norte, no leste e em algumas bordas a oeste."><img src="figures/p6_setores_prioritarios.png" class="img-fluid figure-img" alt="Setores prioritários (vermelho) e parques grandes (contorno azul). Os prioritários se concentram em manchas no centro-norte, no leste e em algumas bordas a oeste."></a></p>
 <figcaption>Setores prioritários (vermelho) e parques grandes (contorno azul). Os prioritários se concentram em manchas no centro-norte, no leste e em algumas bordas a oeste.</figcaption>
 </figure>
 </div>
-<p>Esse critério é uma <strong>escolha explícita</strong>, feita para orientar onde olhar primeiro, e não um diagnóstico definitivo. Testamos variações dos limites (percentil, distância, grupos de renda) e o conjunto muda de tamanho, mas as manchas principais permanecem.</p>
-</section>
-<section id="explore-o-mapa" class="level2 page-columns page-full" data-number="8">
-<h2 data-number="8" class="anchored" data-anchor-id="explore-o-mapa"><span class="header-section-number">8</span> Explore o mapa</h2>
-<p>Ligue e desligue as camadas e clique em um setor para ver os dados dele.</p>
-<iframe src="mapa.html" width="100%" height="650" style="border:0" class="column-page">
-</iframe>
-</section>
-<section id="o-que-esta-análise-não-diz" class="level2" data-number="9">
-<h2 data-number="9" class="anchored" data-anchor-id="o-que-esta-análise-não-diz"><span class="header-section-number">9</span> O que esta análise não diz</h2>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Limite</th>
-<th>Por que importa</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Associação, não causa</td>
-<td>Não afirmamos que a renda causa o calor, nem que um parque, por si só, esfria um bairro.</td>
-</tr>
-<tr class="even">
-<td>Temperatura de superfície</td>
-<td>Não é a temperatura do ar nem a sensação térmica.</td>
-</tr>
-<tr class="odd">
-<td>Janela de dois meses</td>
-<td>Agosto e setembro de 2026, no período seco. Outras estações podem mostrar outro padrão.</td>
-</tr>
-<tr class="even">
-<td>Autocorrelação espacial</td>
-<td>Setores vizinhos são parecidos, então a precisão estatística é menor do que parece.</td>
-</tr>
-<tr class="odd">
-<td>Critério de prioridade</td>
-<td>É uma escolha, e outras escolhas</td>
-</tr>
-</tbody>
-</table>
+</div>
+</div>
+</div>
 
 
+<div class="ojs-auto-generated hidden">
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6WyAgeyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiaW5saW5lIjoidHJ1ZSIsInNvdXJjZSI6Imh0bC5odG1sYDxzcGFuPiR7Zm10SW50KHNldG9yZXMubGVuZ3RoKX08L3NwYW4+YCIsICJjZWxsTmFtZSI6Im9qcy1lbGVtZW50LWlkLTEifSwgIHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImlubGluZSI6InRydWUiLCJzb3VyY2UiOiJodGwuaHRtbGA8c3Bhbj4ke2ZtdCgtZGlmUTUpfTwvc3Bhbj5gIiwgImNlbGxOYW1lIjoib2pzLWVsZW1lbnQtaWQtMiJ9LCAgeyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiaW5saW5lIjoidHJ1ZSIsInNvdXJjZSI6Imh0bC5odG1sYDxzcGFuPiR7Zm10KFExLmRpc3RNZWRpYW5hLCAxKX08L3NwYW4+YCIsICJjZWxsTmFtZSI6Im9qcy1lbGVtZW50LWlkLTMifSwgIHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImlubGluZSI6InRydWUiLCJzb3VyY2UiOiJodGwuaHRtbGA8c3Bhbj4ke2ZtdChRNS5kaXN0TWVkaWFuYSwgMSl9PC9zcGFuPmAiLCAiY2VsbE5hbWUiOiJvanMtZWxlbWVudC1pZC00In0sICB7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJpbmxpbmUiOiJ0cnVlIiwic291cmNlIjoiaHRsLmh0bWxgPHNwYW4+JHtmbXRJbnQoblByaW8pfTwvc3Bhbj5gIiwgImNlbGxOYW1lIjoib2pzLWVsZW1lbnQtaWQtNSJ9LCAgeyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiaW5saW5lIjoidHJ1ZSIsInNvdXJjZSI6Imh0bC5odG1sYDxzcGFuPiR7Zm10KC1kaWZRNSl9PC9zcGFuPmAiLCAiY2VsbE5hbWUiOiJvanMtZWxlbWVudC1pZC02In0sICB7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJpbmxpbmUiOiJ0cnVlIiwic291cmNlIjoiaHRsLmh0bWxgPHNwYW4+JHtmbXQoZDMubWluKGVzdGF0UXVpbnRpcy5zbGljZSgwLCA0KSwgKGQpID0+IGQubWVkaWFuYSksIDEpfTwvc3Bhbj5gIiwgImNlbGxOYW1lIjoib2pzLWVsZW1lbnQtaWQtNyJ9LCAgeyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiaW5saW5lIjoidHJ1ZSIsInNvdXJjZSI6Imh0bC5odG1sYDxzcGFuPiR7Zm10KGQzLm1heChlc3RhdFF1aW50aXMuc2xpY2UoMCwgNCksIChkKSA9PiBkLm1lZGlhbmEpLCAxKX08L3NwYW4+YCIsICJjZWxsTmFtZSI6Im9qcy1lbGVtZW50LWlkLTgifSwgIHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImlubGluZSI6InRydWUiLCJzb3VyY2UiOiJodGwuaHRtbGA8c3Bhbj4ke2ZtdChzcGVhcm1hbil9PC9zcGFuPmAiLCAiY2VsbE5hbWUiOiJvanMtZWxlbWVudC1pZC05In0sICB7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJpbmxpbmUiOiJ0cnVlIiwic291cmNlIjoiaHRsLmh0bWxgPHNwYW4+JHtmbXQoUTUuYXJ2b3JlLCAxKX08L3NwYW4+YCIsICJjZWxsTmFtZSI6Im9qcy1lbGVtZW50LWlkLTEwIn0sICB7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJpbmxpbmUiOiJ0cnVlIiwic291cmNlIjoiaHRsLmh0bWxgPHNwYW4+JHtmbXQoUTUuY29uc3RydWlkbywgMSl9PC9zcGFuPmAiLCAiY2VsbE5hbWUiOiJvanMtZWxlbWVudC1pZC0xMSJ9LCAgeyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiaW5saW5lIjoidHJ1ZSIsInNvdXJjZSI6Imh0bC5odG1sYDxzcGFuPiR7Zm10KFE1LmRpc3RNZWRpYW5hLCAxKX08L3NwYW4+YCIsICJjZWxsTmFtZSI6Im9qcy1lbGVtZW50LWlkLTEyIn0sICB7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJpbmxpbmUiOiJ0cnVlIiwic291cmNlIjoiaHRsLmh0bWxgPHNwYW4+JHtmbXQoUTEuZGlzdE1lZGlhbmEsIDEpfTwvc3Bhbj5gIiwgImNlbGxOYW1lIjoib2pzLWVsZW1lbnQtaWQtMTMifSwgIHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImlubGluZSI6InRydWUiLCJzb3VyY2UiOiJodGwuaHRtbGA8c3Bhbj4ke3BhcnF1ZXNHZW8uZmVhdHVyZXMubGVuZ3RofTwvc3Bhbj5gIiwgImNlbGxOYW1lIjoib2pzLWVsZW1lbnQtaWQtMTQifSwgIHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImlubGluZSI6InRydWUiLCJzb3VyY2UiOiJodGwuaHRtbGA8c3Bhbj4ke2ZtdChkaWZQZXJ0bzJhNCwgMSl9PC9zcGFuPmAiLCAiY2VsbE5hbWUiOiJvanMtZWxlbWVudC1pZC0xNSJ9LCAgeyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiaW5saW5lIjoidHJ1ZSIsInNvdXJjZSI6Imh0bC5odG1sYDxzcGFuPiR7Zm10SW50KG5QcmlvKX08L3NwYW4+YCIsICJjZWxsTmFtZSI6Im9qcy1lbGVtZW50LWlkLTE2In0sICB7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJpbmxpbmUiOiJ0cnVlIiwic291cmNlIjoiaHRsLmh0bWxgPHNwYW4+JHtmbXQocGN0UHJpbyl9PC9zcGFuPmAiLCAiY2VsbE5hbWUiOiJvanMtZWxlbWVudC1pZC0xNyJ9LCAgeyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiaW5saW5lIjoidHJ1ZSIsInNvdXJjZSI6Imh0bC5odG1sYDxzcGFuPiR7Zm10KGxpbWlhclA3NSl9PC9zcGFuPmAiLCAiY2VsbE5hbWUiOiJvanMtZWxlbWVudC1pZC0xOCJ9LCAgeyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiaW5saW5lIjoidHJ1ZSIsInNvdXJjZSI6Imh0bC5odG1sYDxzcGFuPiR7Zm10SW50KHNldG9yZXMubGVuZ3RoKX08L3NwYW4+YCIsICJjZWxsTmFtZSI6Im9qcy1lbGVtZW50LWlkLTE5In0sICB7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJpbmxpbmUiOiJ0cnVlIiwic291cmNlIjoiaHRsLmh0bWxgPHNwYW4+JHtwYXJxdWVzR2VvLmZlYXR1cmVzLmxlbmd0aH08L3NwYW4+YCIsICJjZWxsTmFtZSI6Im9qcy1lbGVtZW50LWlkLTIwIn1dfQ==
+</script>
+</div>
 </section>
 
 </main> <!-- /main -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6Ii8vIC0tLS0tLS0tLS0gYmlibGlvdGVjYXMgKENETiwgdmVyc8OjbyBmaXhhKSBlIGRhZG9zIC0tLS0tLS0tLS1cbmQzID0gaW1wb3J0KFwiaHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L25wbS9kM0A3LjkuMC8rZXNtXCIpXG5QbG90ID0gaW1wb3J0KFwiaHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L25wbS9Ab2JzZXJ2YWJsZWhxL3Bsb3RAMC42LjE2Lytlc21cIilcbm1hcGFMaWIgPSBpbXBvcnQobmV3IFVSTChcImFzc2V0cy9tYXBhLmpzXCIsIGRvY3VtZW50LmJhc2VVUkkpLmhyZWYpXG5zZXRvcmVzR2VvID0gRmlsZUF0dGFjaG1lbnQoXCJkYXRhL3NlY3RvcnMuZ2VvanNvblwiKS5qc29uKClcbnBhcnF1ZXNHZW8gPSBGaWxlQXR0YWNobWVudChcImRhdGEvcGFya3MuZ2VvanNvblwiKS5qc29uKClcbnNldG9yZXMgPSBzZXRvcmVzR2VvLmZlYXR1cmVzLm1hcCgoZikgPT4gZi5wcm9wZXJ0aWVzKVxuXG4vLyAtLS0tLS0tLS0tIGZvcm1hdGHDp8OjbyBlbSBwdC1CUiAtLS0tLS0tLS0tXG4vLyBzaW5hbCBkZSBtZW5vcyB0aXBvZ3LDoWZpY28gKOKIkikgbm8gbHVnYXIgZG8gaMOtZmVuXG5mbXQgPSAoeCwgYyA9IDIpID0+IHgudG9Mb2NhbGVTdHJpbmcoXCJwdC1CUlwiLCB7IG1pbmltdW1GcmFjdGlvbkRpZ2l0czogYywgbWF4aW11bUZyYWN0aW9uRGlnaXRzOiBjIH0pLnJlcGxhY2UoXCItXCIsIFwi4oiSXCIpXG5mbXRJbnQgPSAoeCkgPT4geC50b0xvY2FsZVN0cmluZyhcInB0LUJSXCIpXG5mbXRSZW5kYSA9ICh4KSA9PiBcIlIkIFwiICsgeC50b0xvY2FsZVN0cmluZyhcInB0LUJSXCIsIHsgbWF4aW11bUZyYWN0aW9uRGlnaXRzOiAxIH0pXG5ERVNUQVFVRSA9IFwiI2ZkYWU2MVwiXG5USU5UQSA9IFwiI2Q5ZDRjYVwiXG5BUEFHQURPID0gXCIjOGQ4YTg0XCJcblxuLy8gLS0tLS0tLS0tLSBlc3RhdMOtc3RpY2FzIHBvciBxdWludGlsIChkMy5xdWFudGlsZSA9IG1lc21vIG3DqXRvZG8gZG8gcGFuZGFzKSAtLS0tLS0tLS0tXG5lc3RhdFF1aW50aXMgPSBkMy5yYW5nZSgxLCA2KS5tYXAoKHEpID0+IHtcbiAgY29uc3QgZyA9IHNldG9yZXMuZmlsdGVyKChkKSA9PiBkLnF1aW50aWwgPT09IHEpO1xuICBjb25zdCB0ID0gZy5tYXAoKGQpID0+IGQudGVtcGVyYXR1cmEpO1xuICByZXR1cm4ge1xuICAgIHF1aW50aWw6IHEsIHJvdHVsbzogYFEke3F9YCwgbjogZy5sZW5ndGgsXG4gICAgbWVkaWE6IGQzLm1lYW4odCksIG1lZGlhbmE6IGQzLm1lZGlhbih0KSxcbiAgICBxMTogZDMucXVhbnRpbGUodCwgMC4yNSksIHEzOiBkMy5xdWFudGlsZSh0LCAwLjc1KSxcbiAgICBkaXN0TWVkaWE6IGQzLm1lYW4oZywgKGQpID0+IGQuZGlzdF9wYXJrX20pIC8gMTAwMCxcbiAgICBkaXN0TWVkaWFuYTogZDMubWVkaWFuKGcsIChkKSA9PiBkLmRpc3RfcGFya19tKSAvIDEwMDAsXG4gICAgcmVuZGFNaW46IGQzLm1pbihnLCAoZCkgPT4gZC5pbmNvbWVfbWVkaWFuKSwgcmVuZGFNYXg6IGQzLm1heChnLCAoZCkgPT4gZC5pbmNvbWVfbWVkaWFuKSxcbiAgICBhcnZvcmU6IGQzLm1lYW4oZywgKGQpID0+IGQucGN0X3RyZWUpLCBjb25zdHJ1aWRvOiBkMy5tZWFuKGcsIChkKSA9PiBkLnBjdF9idWlsdCksIG5kdmk6IGQzLm1lYW4oZywgKGQpID0+IGQubmR2aV9tZWFuKVxuICB9O1xufSlcblExID0gZXN0YXRRdWludGlzWzBdXG5RNSA9IGVzdGF0UXVpbnRpc1s0XVxubWVkaWFRMWFRNCA9IGQzLm1lYW4oZXN0YXRRdWludGlzLnNsaWNlKDAsIDQpLCAoZCkgPT4gZC5tZWRpYSkgICAgICAgICAgLy8gbcOpZGlhIGRhcyA0IG3DqWRpYXMgZGUgZ3J1cG9cbm1lZGlhUTFhUTRTZXRvcmVzID0gZDMubWVhbihzZXRvcmVzLmZpbHRlcigoZCkgPT4gZC5xdWludGlsIDwgNSksIChkKSA9PiBkLnRlbXBlcmF0dXJhKVxuZGlmUTUgPSBRNS5tZWRpYSAtIG1lZGlhUTFhUTRcbmZhaXhhc1JlbmRhID0gZXN0YXRRdWludGlzLm1hcCgoZCkgPT4gKHsgcXVpbnRpbDogZC5xdWludGlsLCBtaW46IGQucmVuZGFNaW4sIG1heDogZC5yZW5kYU1heCB9KSlcbnBhcmFkYXNUZW1wID0gWzAuMDUsIDAuMjUsIDAuNSwgMC43NSwgMC45NV0ubWFwKChwKSA9PiBkMy5xdWFudGlsZShzZXRvcmVzLCBwLCAoZCkgPT4gZC50ZW1wZXJhdHVyYSkpXG5cbi8vIC0tLS0tLS0tLS0gY29ycmVsYcOnw6NvIGRlIFNwZWFybWFuIChyZW5kYSDDlyB0ZW1wZXJhdHVyYSksIGNvbSBwb3N0b3MgbcOpZGlvcyBub3MgZW1wYXRlcyAtLS0tLS0tLS0tXG5wb3N0b3MgPSAodikgPT4ge1xuICBjb25zdCBvcmRlbSA9IGQzLnJhbmdlKHYubGVuZ3RoKS5zb3J0KChhLCBiKSA9PiB2W2FdIC0gdltiXSk7XG4gIGNvbnN0IHIgPSBuZXcgQXJyYXkodi5sZW5ndGgpO1xuICBmb3IgKGxldCBpID0gMDsgaSA8IG9yZGVtLmxlbmd0aDsgKSB7XG4gICAgbGV0IGogPSBpO1xuICAgIHdoaWxlIChqICsgMSA8IG9yZGVtLmxlbmd0aCAmJiB2W29yZGVtW2ogKyAxXV0gPT09IHZbb3JkZW1baV1dKSBqKys7XG4gICAgZm9yIChsZXQgayA9IGk7IGsgPD0gajsgaysrKSByW29yZGVtW2tdXSA9IChpICsgaikgLyAyICsgMTtcbiAgICBpID0gaiArIDE7XG4gIH1cbiAgcmV0dXJuIHI7XG59XG5zcGVhcm1hbiA9IHtcbiAgY29uc3QgYSA9IHBvc3RvcyhzZXRvcmVzLm1hcCgoZCkgPT4gZC5pbmNvbWVfbWVkaWFuKSk7XG4gIGNvbnN0IGIgPSBwb3N0b3Moc2V0b3Jlcy5tYXAoKGQpID0+IGQudGVtcGVyYXR1cmEpKTtcbiAgY29uc3QgbWEgPSBkMy5tZWFuKGEpLCBtYiA9IGQzLm1lYW4oYik7XG4gIHJldHVybiBkMy5zdW0oYSwgKHgsIGkpID0+ICh4IC0gbWEpICogKGJbaV0gLSBtYikpIC9cbiAgICBNYXRoLnNxcnQoZDMuc3VtKGEsICh4KSA9PiAoeCAtIG1hKSAqKiAyKSAqIGQzLnN1bShiLCAoeCkgPT4gKHggLSBtYikgKiogMikpO1xufVxuXG4vLyAtLS0tLS0tLS0tIGNyaXTDqXJpbyBkZSBwcmlvcmlkYWRlIGRvIGVzdHVkbyAtLS0tLS0tLS0tXG5saW1pYXJQNzUgPSBkMy5xdWFudGlsZShzZXRvcmVzLCAwLjc1LCAoZCkgPT4gZC50ZW1wZXJhdHVyYSlcbmVoUHJpb3JpdGFyaW8gPSAoZCwgcXVpbnRpcywgbGltaWFyLCBkaXN0YW5jaWEpID0+XG4gIHF1aW50aXMuaW5jbHVkZXMoZC5xdWludGlsKSAmJiBkLnRlbXBlcmF0dXJhID4gbGltaWFyICYmIGQuZGlzdF9wYXJrX20gPiBkaXN0YW5jaWFcbmlkc1ByaW9yaXRhcmlvcyA9IG5ldyBTZXQoc2V0b3Jlcy5maWx0ZXIoKGQpID0+IGVoUHJpb3JpdGFyaW8oZCwgWzEsIDJdLCBsaW1pYXJQNzUsIDIwMDApKS5tYXAoKGQpID0+IGQuc2VjdG9yX2lkKSlcbm5QcmlvID0gaWRzUHJpb3JpdGFyaW9zLnNpemVcbnBjdFByaW8gPSAoMTAwICogblByaW8pIC8gc2V0b3Jlcy5sZW5ndGhcbkVTUEVSQURPX1BSSU8gPSAyMjUgICAvLyBjb250YWdlbSBkbyBub3RlYm9vayAwNiAodGFiZWxhIGRlIHNlbnNpYmlsaWRhZGUpLCB1c2FkYSBzw7MgcGFyYSBjb25mZXLDqm5jaWFcblxuLy8gLS0tLS0tLS0tLSBmYWl4YXMgZGUgZGlzdMOibmNpYSBhbyBwYXJxdWUgLS0tLS0tLS0tLVxuZmFpeGFzID0gW1xuICB7IHJvdHVsbzogXCI8IDAsNSBrbVwiLCBtaW46IDAsIG1heDogNTAwIH0sXG4gIHsgcm90dWxvOiBcIjAsNeKAkzEga21cIiwgbWluOiA1MDAsIG1heDogMTAwMCB9LFxuICB7IHJvdHVsbzogXCIx4oCTMiBrbVwiLCBtaW46IDEwMDAsIG1heDogMjAwMCB9LFxuICB7IHJvdHVsbzogXCIy4oCTNCBrbVwiLCBtaW46IDIwMDAsIG1heDogNDAwMCB9LFxuICB7IHJvdHVsbzogXCI+IDQga21cIiwgbWluOiA0MDAwLCBtYXg6IEluZmluaXR5IH1cbl1cbmVzdGF0RmFpeGFzID0gZmFpeGFzLm1hcCgoZikgPT4ge1xuICBjb25zdCBnID0gc2V0b3Jlcy5maWx0ZXIoKGQpID0+IGQuZGlzdF9wYXJrX20gPj0gZi5taW4gJiYgZC5kaXN0X3BhcmtfbSA8IGYubWF4KTtcbiAgcmV0dXJuIHsgLi4uZiwgbjogZy5sZW5ndGgsIG1lZGlhOiBkMy5tZWFuKGcsIChkKSA9PiBkLnRlbXBlcmF0dXJhKSwgbWVkaWFuYTogZDMubWVkaWFuKGcsIChkKSA9PiBkLnRlbXBlcmF0dXJhKSB9O1xufSlcbmRpZlBlcnRvMmE0ID0gZXN0YXRGYWl4YXNbM10ubWVkaWEgLSBlc3RhdEZhaXhhc1swXS5tZWRpYVxuXG4vLyAtLS0tLS0tLS0tIGxhcmd1cmEgZGFzIMOhcmVhcyBsYXJnYXMgKC5jb2x1bW4tcGFnZSksIHJlYXRpdmEgYW8gcmVkaW1lbnNpb25hciAtLS0tLS0tLS0tXG5sYXJndXJhTGFyZ2EgPSBHZW5lcmF0b3JzLm9ic2VydmUoKG5vdGlmaWNhcikgPT4ge1xuICBjb25zdCBhbHZvID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJtZWRpZGEtcGFnaW5hXCIpO1xuICBjb25zdCBvYnMgPSBuZXcgUmVzaXplT2JzZXJ2ZXIoKCkgPT4gbm90aWZpY2FyKE1hdGgubWF4KDMyMCwgYWx2by5jbGllbnRXaWR0aCkpKTtcbiAgb2JzLm9ic2VydmUoYWx2byk7XG4gIG5vdGlmaWNhcihNYXRoLm1heCgzMjAsIGFsdm8uY2xpZW50V2lkdGgpKTtcbiAgcmV0dXJuICgpID0+IG9icy5kaXNjb25uZWN0KCk7XG59KVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0yIiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoidmlld29mIHF1aW50aWxDbGljYWRvID0ge1xuICAvLyBkaXNwZXJzw6NvIHZlcnRpY2FsIGZpeGEgKHNlbWVudGUpIHBhcmEgb3MgcG9udG9zIG7Do28gc2Ugc29icmVwb3JlbVxuICBjb25zdCBhbGVhdG9yaW8gPSBkMy5yYW5kb21MY2coNyk7XG4gIGNvbnN0IGRlc3ZpbyA9IG5ldyBNYXAoc2V0b3Jlcy5tYXAoKGQpID0+IFtkLnNlY3Rvcl9pZCwgKGFsZWF0b3JpbygpIC0gMC41KSAqIDAuNTZdKSk7XG4gIGNvbnN0IGNvciA9IChxKSA9PiAocSA9PT0gNSA/IERFU1RBUVVFIDogQVBBR0FETyk7XG4gIGNvbnN0IGdyYWZpY28gPSBQbG90LnBsb3Qoe1xuICAgIHdpZHRoOiBsYXJndXJhTGFyZ2EsXG4gICAgaGVpZ2h0OiAzODAsXG4gICAgbWFyZ2luTGVmdDogNDgsXG4gICAgbWFyZ2luQm90dG9tOiA0NCxcbiAgICBzdHlsZTogeyBiYWNrZ3JvdW5kOiBcInRyYW5zcGFyZW50XCIsIGNvbG9yOiBUSU5UQSwgZm9udEZhbWlseTogXCInU291cmNlIFNhbnMgMycsIHN5c3RlbS11aSwgc2Fucy1zZXJpZlwiLCBmb250U2l6ZTogXCIxMi41cHhcIiB9LFxuICAgIC8vIHPDsyBncmF1cyBpbnRlaXJvcyBubyBlaXhvIChhbnRlcywgdGlja3MgZGUgbWVpbyBncmF1IGFycmVkb25kYWRvcyBhcGFyZWNpYW0gcmVwZXRpZG9zOiAyNywgMjcsIDI44oCmKVxuICAgIHg6IHsgbGFiZWw6IFwiVGVtcGVyYXR1cmEgZGUgYnJpbGhvIGRhIHN1cGVyZsOtY2llICjCsEMpIOKGklwiLCBncmlkOiB0cnVlLFxuICAgICAgICAgdGlja3M6IGQzLnJhbmdlKE1hdGguY2VpbChkMy5taW4oc2V0b3JlcywgKGQpID0+IGQudGVtcGVyYXR1cmEpKSwgTWF0aC5mbG9vcihkMy5tYXgoc2V0b3JlcywgKGQpID0+IGQudGVtcGVyYXR1cmEpKSArIDEpLFxuICAgICAgICAgdGlja0Zvcm1hdDogKGQpID0+IGZtdChkLCAwKSB9LFxuICAgIHk6IHsgZG9tYWluOiBbNS42LCAwLjRdLCB0aWNrczogWzEsIDIsIDMsIDQsIDVdLCB0aWNrRm9ybWF0OiAoZCkgPT4gYFEke2R9YCwgbGFiZWw6IG51bGwsIHRpY2tTaXplOiAwIH0sXG4gICAgbWFya3M6IFtcbiAgICAgIFBsb3QuZG90KHNldG9yZXMsIHsgeDogXCJ0ZW1wZXJhdHVyYVwiLCB5OiAoZCkgPT4gZC5xdWludGlsICsgZGVzdmlvLmdldChkLnNlY3Rvcl9pZCksIHI6IDEuNixcbiAgICAgICAgZmlsbDogKGQpID0+IGNvcihkLnF1aW50aWwpLCBmaWxsT3BhY2l0eTogMC4zMiB9KSxcbiAgICAgIFBsb3QucnVsZVgoW21lZGlhUTFhUTRdLCB7IHkxOiAwLjUsIHkyOiA0LjUsIHN0cm9rZTogQVBBR0FETywgc3Ryb2tlRGFzaGFycmF5OiBcIjMsM1wiIH0pLFxuICAgICAgUGxvdC50ZXh0KFttZWRpYVExYVE0XSwgeyB4OiAoZCkgPT4gZCwgeTogMC40NSwgdGV4dDogKCkgPT4gXCJtw6lkaWEgUTHigJNRNFwiLCBmaWxsOiBBUEFHQURPLCBkeTogMCwgdGV4dEFuY2hvcjogXCJzdGFydFwiLCBkeDogNCB9KSxcbiAgICAgIFBsb3QucmVjdChlc3RhdFF1aW50aXMsIHsgeDE6IFwicTFcIiwgeDI6IFwicTNcIiwgeTE6IChkKSA9PiBkLnF1aW50aWwgLSAwLjMyLCB5MjogKGQpID0+IGQucXVpbnRpbCArIDAuMzIsXG4gICAgICAgIGZpbGw6IFwibm9uZVwiLCBzdHJva2U6IChkKSA9PiAoZC5xdWludGlsID09PSA1ID8gREVTVEFRVUUgOiBUSU5UQSksIHN0cm9rZVdpZHRoOiAxLjMgfSksXG4gICAgICBQbG90LnJ1bGVYKGVzdGF0UXVpbnRpcywgeyB4OiBcIm1lZGlhbmFcIiwgeTE6IChkKSA9PiBkLnF1aW50aWwgLSAwLjMyLCB5MjogKGQpID0+IGQucXVpbnRpbCArIDAuMzIsXG4gICAgICAgIHN0cm9rZTogKGQpID0+IChkLnF1aW50aWwgPT09IDUgPyBERVNUQVFVRSA6IFRJTlRBKSwgc3Ryb2tlV2lkdGg6IDIuNSB9KSxcbiAgICAgIFBsb3QuZG90KGVzdGF0UXVpbnRpcywgeyB4OiBcIm1lZGlhXCIsIHk6IFwicXVpbnRpbFwiLCByOiA0LCBmaWxsOiBcIiMwZTBlMGVcIixcbiAgICAgICAgc3Ryb2tlOiAoZCkgPT4gKGQucXVpbnRpbCA9PT0gNSA/IERFU1RBUVVFIDogVElOVEEpLCBzdHJva2VXaWR0aDogMS41IH0pLFxuICAgICAgUGxvdC50aXAoZXN0YXRRdWludGlzLCBQbG90LnBvaW50ZXJZKHtcbiAgICAgICAgeDogXCJxM1wiLCB5OiBcInF1aW50aWxcIiwgYW5jaG9yOiBcImxlZnRcIiwgZmlsbDogXCIjMTUxNTE1XCIsIHN0cm9rZTogXCIjNDQ0XCIsXG4gICAgICAgIHRpdGxlOiAoZCkgPT4gW1xuICAgICAgICAgIGBRJHtkLnF1aW50aWx9IMK3ICR7Zm10SW50KGQubil9IHNldG9yZXNgLFxuICAgICAgICAgIGByZW5kYSBtZWRpYW5hICR7Zm10UmVuZGEoZC5yZW5kYU1pbil9IGEgJHtmbXRSZW5kYShkLnJlbmRhTWF4KX1gLFxuICAgICAgICAgIGBtw6lkaWEgJHtmbXQoZC5tZWRpYSl9IMKwQyDCtyBtZWRpYW5hICR7Zm10KGQubWVkaWFuYSl9IMKwQ2AsXG4gICAgICAgICAgYHF1YXJ0aXMgJHtmbXQoZC5xMSl9IGEgJHtmbXQoZC5xMyl9IMKwQ2AsXG4gICAgICAgICAgXCJjbGlxdWUgcGFyYSBkZXN0YWNhciBubyBtYXBhXCJcbiAgICAgICAgXS5qb2luKFwiXFxuXCIpXG4gICAgICB9KSlcbiAgICBdXG4gIH0pO1xuICAvLyBjbGlxdWU6IGVzY29saGUgKG91IGRlc2ZheikgbyBxdWludGlsIHNvYiBvIHBvbnRlaXJvIGUgYXZpc2EgbyBtYXBhXG4gIGNvbnN0IGNhaXhhID0gaHRtbGA8ZGl2IGNsYXNzPVwiZ3JhZmljby1xdWludGlzXCI+JHtncmFmaWNvfTwvZGl2PmA7XG4gIGNhaXhhLnZhbHVlID0gbnVsbDtcbiAgZ3JhZmljby5hZGRFdmVudExpc3RlbmVyKFwiaW5wdXRcIiwgKGUpID0+IGUuc3RvcFByb3BhZ2F0aW9uKCkpO1xuICBncmFmaWNvLmFkZEV2ZW50TGlzdGVuZXIoXCJjbGlja1wiLCAoKSA9PiB7XG4gICAgY29uc3QgZCA9IGdyYWZpY28udmFsdWU7XG4gICAgY2FpeGEudmFsdWUgPSBkICYmIGNhaXhhLnZhbHVlICE9PSBkLnF1aW50aWwgPyBkLnF1aW50aWwgOiBudWxsO1xuICAgIGNhaXhhLmRpc3BhdGNoRXZlbnQobmV3IEV2ZW50KFwiaW5wdXRcIiwgeyBidWJibGVzOiB0cnVlIH0pKTtcbiAgfSk7XG4gIHJldHVybiBjYWl4YTtcbn1cbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMyIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6Imh0bWxgPHAgY2xhc3M9XCJsZWdlbmRhLWdyYWZpY29cIj5DYWRhIHBvbnRvIMOpIHVtIHNldG9yLiBBIGNhaXhhIGNvYnJlIG9zIDUwJSBkbyBtZWlvLCBvIHRyYcOnbyBncm9zc28gw6kgYSBtZWRpYW5hIGUgbyBjw61yY3VsbyDDqSBhIG3DqWRpYTsgYSBsaW5oYSB0cmFjZWphZGEgw6kgYSBtw6lkaWEgZG9zIGdydXBvcyBRMSBhIFE0LiBQYXNzZSBvIG1vdXNlIHNvYnJlIHVtIGdydXBvIHBhcmEgdmVyIG9zIG7Dum1lcm9zOyBjbGlxdWUgcGFyYSBtYXJjYXIgb3Mgc2V0b3JlcyBkZWxlIG5vIDxhIGhyZWY9XCIjZXhwbG9yZS1vLW1hcGFcIj5tYXBhPC9hPiR7cXVpbnRpbENsaWNhZG8gPyBodG1sYCAoYWdvcmE6IDxzdHJvbmc+USR7cXVpbnRpbENsaWNhZG99PC9zdHJvbmc+IGRlc3RhY2FkbylgIDogXCJcIn0uPC9wPmBcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtNCIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6Imh0bWxgPHRhYmxlIGNsYXNzPVwidGFiZWxhLW51bWVyb3NcIj5cbiAgPHRoZWFkPjx0cj48dGg+R3J1cG88L3RoPjx0aD7DgXJ2b3JlcyAoJSk8L3RoPjx0aD5Db25zdHJ1w61kbyAoJSk8L3RoPjx0aD5ORFZJIG3DqWRpbzwvdGg+PHRoPlRlbXBlcmF0dXJhIG3DqWRpYTwvdGg+PC90cj48L3RoZWFkPlxuICA8dGJvZHk+JHtlc3RhdFF1aW50aXMubWFwKChkKSA9PiBodG1sYDx0ciBjbGFzcz0ke2QucXVpbnRpbCA9PT0gNSA/IFwibGluaGEtZGVzdGFxdWVcIiA6IFwiXCJ9PlxuICAgIDx0ZD5RJHtkLnF1aW50aWx9PC90ZD48dGQ+JHtmbXQoZC5hcnZvcmUsIDEpfTwvdGQ+PHRkPiR7Zm10KGQuY29uc3RydWlkbywgMSl9PC90ZD48dGQ+JHtmbXQoZC5uZHZpKX08L3RkPjx0ZD4ke2ZtdChkLm1lZGlhKX0gwrBDPC90ZD48L3RyPmApfVxuICA8L3Rib2R5PjwvdGFibGU+XG4gIDxwIGNsYXNzPVwibGVnZW5kYS1ncmFmaWNvXCI+TcOpZGlhcyBwb3IgZ3J1cG8gZGUgcmVuZGEsIGNhbGN1bGFkYXMgYSBwYXJ0aXIgZGEgdGFiZWxhIGRlIHNldG9yZXMuPC9wPmBcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtNSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBmYWl4YXNTZWwgPSBJbnB1dHMuY2hlY2tib3goZmFpeGFzLm1hcCgoZikgPT4gZi5yb3R1bG8pLCB7XG4gIGxhYmVsOiBcIkZhaXhhcyBkZSBkaXN0w6JuY2lhXCIsXG4gIHZhbHVlOiBmYWl4YXMubWFwKChmKSA9PiBmLnJvdHVsbylcbn0pXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTYiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJ7XG4gIGNvbnN0IGF0aXZhID0gbmV3IFNldChmYWl4YXNTZWwpO1xuICBjb25zdCBmYWl4YURlID0gKG0pID0+IGZhaXhhcy5maW5kKChmKSA9PiBtID49IGYubWluICYmIG0gPCBmLm1heCkucm90dWxvO1xuICBjb25zdCBtYXhLbSA9IGQzLm1heChzZXRvcmVzLCAoZCkgPT4gZC5kaXN0X3BhcmtfbSkgLyAxMDAwO1xuICBjb25zdCBzZWxlY2lvbmFkb3MgPSBlc3RhdEZhaXhhcy5maWx0ZXIoKGYpID0+IGF0aXZhLmhhcyhmLnJvdHVsbykpO1xuICBjb25zdCBncmFmaWNvID0gUGxvdC5wbG90KHtcbiAgICB3aWR0aDogbGFyZ3VyYUxhcmdhLFxuICAgIGhlaWdodDogNDIwLFxuICAgIG1hcmdpbkxlZnQ6IDQ4LFxuICAgIG1hcmdpbkJvdHRvbTogNDQsXG4gICAgc3R5bGU6IHsgYmFja2dyb3VuZDogXCJ0cmFuc3BhcmVudFwiLCBjb2xvcjogVElOVEEsIGZvbnRGYW1pbHk6IFwiJ1NvdXJjZSBTYW5zIDMnLCBzeXN0ZW0tdWksIHNhbnMtc2VyaWZcIiwgZm9udFNpemU6IFwiMTIuNXB4XCIgfSxcbiAgICB4OiB7IGxhYmVsOiBcIkRpc3TDom5jaWEgYW8gcGFycXVlIGdyYW5kZSBtYWlzIHByw7N4aW1vIChrbSkg4oaSXCIsIGRvbWFpbjogWzAsIE1hdGguY2VpbChtYXhLbSldLCBncmlkOiB0cnVlIH0sXG4gICAgeTogeyBsYWJlbDogXCLihpEgVGVtcGVyYXR1cmEgKMKwQylcIiwgZ3JpZDogdHJ1ZSwgdGlja0Zvcm1hdDogKGQpID0+IGZtdChkLCAwKSB9LFxuICAgIG1hcmtzOiBbXG4gICAgICBQbG90LmRvdChzZXRvcmVzLCB7IHg6IChkKSA9PiBkLmRpc3RfcGFya19tIC8gMTAwMCwgeTogXCJ0ZW1wZXJhdHVyYVwiLCByOiAxLjgsXG4gICAgICAgIGZpbGw6IChkKSA9PiAoYXRpdmEuaGFzKGZhaXhhRGUoZC5kaXN0X3BhcmtfbSkpID8gVElOVEEgOiBcIiMzYTNhM2FcIiksXG4gICAgICAgIGZpbGxPcGFjaXR5OiAoZCkgPT4gKGF0aXZhLmhhcyhmYWl4YURlKGQuZGlzdF9wYXJrX20pKSA/IDAuNDUgOiAwLjI1KSB9KSxcbiAgICAgIFBsb3QucnVsZVgoWzAuNSwgMSwgMiwgNF0sIHsgc3Ryb2tlOiBcIiM1NTVcIiwgc3Ryb2tlRGFzaGFycmF5OiBcIjIsM1wiIH0pLFxuICAgICAgUGxvdC5ydWxlWShzZWxlY2lvbmFkb3MsIHsgeTogXCJtZWRpYVwiLCB4MTogKGQpID0+IGQubWluIC8gMTAwMCwgeDI6IChkKSA9PiBNYXRoLm1pbihkLm1heCAvIDEwMDAsIG1heEttKSxcbiAgICAgICAgc3Ryb2tlOiBERVNUQVFVRSwgc3Ryb2tlV2lkdGg6IDMgfSksXG4gICAgICBQbG90LnRpcChzZXRvcmVzLCBQbG90LnBvaW50ZXIoe1xuICAgICAgICB4OiAoZCkgPT4gZC5kaXN0X3BhcmtfbSAvIDEwMDAsIHk6IFwidGVtcGVyYXR1cmFcIiwgZmlsbDogXCIjMTUxNTE1XCIsIHN0cm9rZTogXCIjNDQ0XCIsXG4gICAgICAgIGZpbHRlcjogKGQpID0+IGF0aXZhLmhhcyhmYWl4YURlKGQuZGlzdF9wYXJrX20pKSxcbiAgICAgICAgdGl0bGU6IChkKSA9PiBbXG4gICAgICAgICAgYHNldG9yICR7ZC5zZWN0b3JfaWR9YCxcbiAgICAgICAgICBgJHtmbXQoZC5kaXN0X3BhcmtfbSAvIDEwMDApfSBrbSBkbyBwYXJxdWUgwrcgJHtmbXQoZC50ZW1wZXJhdHVyYSl9IMKwQ2AsXG4gICAgICAgICAgYFEke2QucXVpbnRpbH0gwrcgcmVuZGEgbWVkaWFuYSAke2ZtdFJlbmRhKGQuaW5jb21lX21lZGlhbil9YFxuICAgICAgICBdLmpvaW4oXCJcXG5cIilcbiAgICAgIH0pKVxuICAgIF1cbiAgfSk7XG4gIGNvbnN0IHRhYmVsYSA9IGh0bWxgPHRhYmxlIGNsYXNzPVwidGFiZWxhLW51bWVyb3NcIj5cbiAgICA8dGhlYWQ+PHRyPjx0aD5GYWl4YTwvdGg+PHRoPlNldG9yZXM8L3RoPjx0aD5UZW1wZXJhdHVyYSBtw6lkaWE8L3RoPjx0aD5NZWRpYW5hPC90aD48L3RyPjwvdGhlYWQ+XG4gICAgPHRib2R5PiR7c2VsZWNpb25hZG9zLm1hcCgoZikgPT4gaHRtbGA8dHI+PHRkPiR7Zi5yb3R1bG99PC90ZD48dGQ+JHtmbXRJbnQoZi5uKX08L3RkPjx0ZD4ke2ZtdChmLm1lZGlhKX0gwrBDPC90ZD48dGQ+JHtmbXQoZi5tZWRpYW5hKX0gwrBDPC90ZD48L3RyPmApfTwvdGJvZHk+XG4gIDwvdGFibGU+YDtcbiAgcmV0dXJuIGh0bWxgPGRpdj4ke2dyYWZpY299XG4gICAgPHAgY2xhc3M9XCJsZWdlbmRhLWdyYWZpY29cIj5DYWRhIHBvbnRvIMOpIHVtIHNldG9yLiBPcyB0cmHDp29zIG5hIGNvciBkZSBkZXN0YXF1ZSBzw6NvIGEgdGVtcGVyYXR1cmEgbcOpZGlhIGRlIGNhZGEgZmFpeGEgc2VsZWNpb25hZGEuIERlc21hcnF1ZSBmYWl4YXMgcGFyYSBjb21wYXLDoS1sYXM7IHBhc3NlIG8gbW91c2Ugc29icmUgdW0gcG9udG8gcGFyYSB2ZXIgbyBzZXRvci48L3A+XG4gICAgJHt0YWJlbGF9PC9kaXY+YDtcbn1cbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtNyIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6Im5QcmlvID09PSBFU1BFUkFET19QUklPXG4gID8gaHRtbGBgXG4gIDogaHRtbGA8cCBjbGFzcz1cImF2aXNvXCI+QXRlbsOnw6NvOiBvIGNyaXTDqXJpbyBkZXUgJHtuUHJpb30gc2V0b3JlcywgZSBuw6NvICR7RVNQRVJBRE9fUFJJT30gY29tbyBubyBub3RlYm9vayAwNi4gQ29uZmlyYSBvcyBkYWRvcyBlbSA8Y29kZT5zaXRlL2RhdGEvPC9jb2RlPi48L3A+YFxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC04IiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoidmlld29mIHNpbVF1aW50aXMgPSBJbnB1dHMuY2hlY2tib3goWzEsIDIsIDMsIDQsIDVdLCB7IGxhYmVsOiBcIkdydXBvcyBkZSByZW5kYSBpbmNsdcOtZG9zXCIsIHZhbHVlOiBbMSwgMl0sIGZvcm1hdDogKHEpID0+IGBRJHtxfWAgfSlcbnZpZXdvZiBzaW1QZXJjZW50aWwgPSBJbnB1dHMucmFuZ2UoWzUwLCA5NV0sIHsgbGFiZWw6IFwiVGVtcGVyYXR1cmEgYWNpbWEgZG8gcGVyY2VudGlsXCIsIHN0ZXA6IDEsIHZhbHVlOiA3NSB9KVxudmlld29mIHNpbURpc3RhbmNpYSA9IElucHV0cy5yYW5nZShbMCwgNTAwMF0sIHsgbGFiZWw6IFwiRGlzdMOibmNpYSBtw61uaW1hIGEgcGFycXVlIGdyYW5kZSAobSlcIiwgc3RlcDogMTAwLCB2YWx1ZTogMjAwMCB9KVxudmlld29mIHNpbVJlaW5pY2lhciA9IElucHV0cy5idXR0b24oXCJWb2x0YXIgYW8gY3JpdMOpcmlvIGRvIGVzdHVkb1wiLCB7XG4gIHJlZHVjZTogKCkgPT4ge1xuICAgIGNvbnN0IGRlZmluaXIgPSAodiwgdmFsb3IpID0+IHsgdi52YWx1ZSA9IHZhbG9yOyB2LmRpc3BhdGNoRXZlbnQobmV3IEV2ZW50KFwiaW5wdXRcIiwgeyBidWJibGVzOiB0cnVlIH0pKTsgfTtcbiAgICBkZWZpbmlyKHZpZXdvZiBzaW1RdWludGlzLCBbMSwgMl0pO1xuICAgIGRlZmluaXIodmlld29mIHNpbVBlcmNlbnRpbCwgNzUpO1xuICAgIGRlZmluaXIodmlld29mIHNpbURpc3RhbmNpYSwgMjAwMCk7XG4gIH1cbn0pXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTkiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJzaW1MaW1pYXIgPSBkMy5xdWFudGlsZShzZXRvcmVzLCBzaW1QZXJjZW50aWwgLyAxMDAsIChkKSA9PiBkLnRlbXBlcmF0dXJhKVxuc2ltSWRzID0gbmV3IFNldChzZXRvcmVzLmZpbHRlcigoZCkgPT4gZWhQcmlvcml0YXJpbyhkLCBzaW1RdWludGlzLCBzaW1MaW1pYXIsIHNpbURpc3RhbmNpYSkpLm1hcCgoZCkgPT4gZC5zZWN0b3JfaWQpKVxuc2ltQ29tdW5zID0gWy4uLnNpbUlkc10uZmlsdGVyKChpZCkgPT4gaWRzUHJpb3JpdGFyaW9zLmhhcyhpZCkpLmxlbmd0aFxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0xMCIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6Imh0bWxgPHAgY2xhc3M9XCJjb250YWRvclwiIGFyaWEtbGl2ZT1cInBvbGl0ZVwiPjxzcGFuIGNsYXNzPVwiYmlnXCI+JHtmbXRJbnQoc2ltSWRzLnNpemUpfTwvc3Bhbj4gc2V0b3Jlc1xuICAoJHtmbXQoKDEwMCAqIHNpbUlkcy5zaXplKSAvIHNldG9yZXMubGVuZ3RoKX0lIGRvIHRvdGFsKSDCtyBsaW1pYXIgZGUgdGVtcGVyYXR1cmEgJHtmbXQoc2ltTGltaWFyKX0gwrBDIMK3XG4gICR7Zm10SW50KHNpbUNvbXVucyl9IGVtIGNvbXVtIGNvbSBvIGNyaXTDqXJpbyBkbyBlc3R1ZG8sICR7Zm10SW50KHNpbUlkcy5zaXplIC0gc2ltQ29tdW5zKX0gbm92b3MsXG4gICR7Zm10SW50KG5QcmlvIC0gc2ltQ29tdW5zKX0gc2HDrXJhbTwvcD5gXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTExIiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoibWFwYVNpbXVsYWRvciA9IChhd2FpdCBtYXBhTGliKS5jcmlhck1hcGEoZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJtYXBhLXNpbXVsYWRvclwiKSwge1xuICBzZXRvcmVzOiBzZXRvcmVzR2VvLCBwYXJxdWVzOiBwYXJxdWVzR2VvLCBjYW1hZGE6IFwic2ltdWxhY2FvXCIsIHBhcmFkYXNUZW1wLCBmYWl4YXNSZW5kYSwgaWRzUHJpb3JpdGFyaW9zXG59KVxuYXR1YWxpemFTaW11bGFkb3IgPSBtYXBhU2ltdWxhZG9yLmRlZmluaXJDb25qdW50byhcInNpbVwiLCBzaW1JZHMpXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTEyIiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoidmlld29mIGNhbWFkYSA9IElucHV0cy5yYWRpbyhcbiAgbmV3IE1hcChbXG4gICAgW1wiVGVtcGVyYXR1cmFcIiwgXCJ0ZW1wZXJhdHVyYVwiXSxcbiAgICBbXCJRdWludGlsIGRlIHJlbmRhXCIsIFwicXVpbnRpbFwiXSxcbiAgICBbXCJEaXN0w6JuY2lhIGFvIHBhcnF1ZVwiLCBcImRpc3RhbmNpYVwiXSxcbiAgICBbXCJTZXRvcmVzIHByaW9yaXTDoXJpb3NcIiwgXCJwcmlvcmlkYWRlXCJdXG4gIF0pLFxuICB7IHZhbHVlOiBcInRlbXBlcmF0dXJhXCIsIGxhYmVsOiBcIkNhbWFkYVwiIH1cbilcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMTMiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJtYXBhRXhwbG9yYXIgPSAoYXdhaXQgbWFwYUxpYikuY3JpYXJNYXBhKGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwibWFwYS1leHBsb3JhclwiKSwge1xuICBzZXRvcmVzOiBzZXRvcmVzR2VvLCBwYXJxdWVzOiBwYXJxdWVzR2VvLCBjYW1hZGE6IFwidGVtcGVyYXR1cmFcIiwgcGFyYWRhc1RlbXAsIGZhaXhhc1JlbmRhLCBpZHNQcmlvcml0YXJpb3Ncbn0pXG50cm9jYUNhbWFkYSA9IG1hcGFFeHBsb3Jhci5tb3N0cmFyQ2FtYWRhKGNhbWFkYSlcbmRlc3RhcXVlUXVpbnRpbCA9IG1hcGFFeHBsb3Jhci5kZXN0YWNhclF1aW50aWwocXVpbnRpbENsaWNhZG8pXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTE0IiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoicXVpbnRpbENsaWNhZG9cbiAgPyBodG1sYDxwIGNsYXNzPVwibGVnZW5kYS1ncmFmaWNvXCI+Q29udG9ybm8gY2xhcm86IHNldG9yZXMgZG8gPHN0cm9uZz5RJHtxdWludGlsQ2xpY2Fkb308L3N0cm9uZz4sIGVzY29saGlkb3Mgbm8gZ3LDoWZpY28gZGUgZ3J1cG9zIGRlIHJlbmRhLiBDbGlxdWUgZGUgbm92byBubyBtZXNtbyBncnVwbyBwYXJhIGxpbXBhci48L3A+YFxuICA6IGh0bWxgYFxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdxdWludGlsQ2xpY2FkbycpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdmYWl4YXNTZWwnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnc2ltUXVpbnRpcycpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdzaW1QZXJjZW50aWwnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnc2ltRGlzdGFuY2lhJykifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ3NpbVJlaW5pY2lhcicpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdjYW1hZGEnKSJ9XX0=
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../..";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -878,6 +1641,7 @@ background-size: cover;
   window.quartoScrollableRegionsLabels = {"code":"Código deslocável","output":"Saída deslocável"};
   </script>
 </div> <!-- /content -->
+<script src="assets/efeitos.js"></script>
 <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
@@ -914,4 +1678,5 @@ background-size: cover;
 
 
 
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>
