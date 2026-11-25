@@ -16,6 +16,7 @@ description: "Calor, vegetação e acesso a parques entre os setores censitário
   </div>
   <div class="capa-veu" aria-hidden="true"></div>
   <div class="capa-texto">
+    <p class="capa-programa">Capstone · Future Tech Leaders</p>
     <h1 class="capa-titulo">Cidade verde para quem?</h1>
     <p class="capa-subtitulo">Calor, vegetação e renda nos setores censitários de Goiânia</p>
     <p class="capa-autoria">Hannah Grecco Moraes Baptista Moreira</p>
@@ -603,6 +604,8 @@ Sousa, S. B. de, & Ferreira, L. G. (2012). Análise da temperatura de superfíci
 :::
 
 ::: {.codigo-aberto}
+**Projeto final (capstone) do programa Future Tech Leaders (FTL)**, trilha geoespacial.
+
 **Código aberto.** Os notebooks, os scripts e a tabela por setor estão em [github.com/HannahGrecco/goiania-thermal-justice](https://github.com/HannahGrecco/goiania-thermal-justice).
 :::
 

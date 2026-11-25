@@ -490,3 +490,12 @@ section.secao-acao > h2::before, h2.secao-acao::before {
 }
 .manchetes-rotulo p { margin: 0; white-space: nowrap; }
 .manchetes-rotulo::after { content: ""; flex: 1; height: 1px; background: #3a3a3a; }
+
+/* selo do programa na capa: texto discreto acima do título, com uma régua curta na cor de destaque */
+.capa-programa {
+  display: inline-flex; align-items: center; gap: .7rem; margin: 0 0 1.4rem;
+  font-family: var(--sans); font-size: .74rem; font-weight: 600; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--tinta-forte);
+}
+.capa-programa::before { content: ""; width: 28px; height: 2px; background: var(--destaque); }
+.codigo-aberto p + p { margin-top: .5rem; }
