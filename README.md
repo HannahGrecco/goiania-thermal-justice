@@ -1,3 +1,5 @@
+🇺🇸 Read in English: [README.en.md](README.en.md)
+
 # Cidade verde para quem?
 
 **Calor, vegetação e renda nos setores censitários de Goiânia**
